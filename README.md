@@ -34,17 +34,17 @@ dark theme
 Roadmap:
 
 sprint 1: 
-- basic structure of project (everyone)
-- connecting MySQL to Django (R. Damian)
-- connecting to IMDb film database (A. Szemalikowska, K. Fułat)
+	- basic structure of project (everyone)
+	- connecting MySQL to Django (R. Damian)
+	- connecting to IMDb film database (A. Szemalikowska, K. Fułat)
 sprint 2: 
-- Basic UI layout (K. Dziadkowiec)
-sprint 3: 
-- machine learning implementation (P. Potepa, R. Damian)
-- writing tests (R. Damian, K. Fułat)
+	- Basic UI layout (K. Dziadkowiec)
+	sprint 3: 
+	- machine learning implementation (P. Potepa, R. Damian)
+	- writing tests (R. Damian, K. Fułat)
 sprint 4: 
-- styling (everyone)
-- working on extra features (everyone)
+	- styling (everyone)
+	- working on extra features (everyone)
 
 
 - continuous integration with heroku
