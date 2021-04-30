@@ -32,6 +32,7 @@ chat,
 dark theme
 	
 Roadmap:
+
 sprint 1: 
 -basic structure of project (everyone)
 -connecting MySQL to Django (R. Damian)
