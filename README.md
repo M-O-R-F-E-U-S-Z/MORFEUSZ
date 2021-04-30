@@ -34,12 +34,22 @@ dark theme
 Roadmap:
 
 sprint 1: 
+- research report: (P. Potępa)
+  - data sources
+  - how to get characteristic of the movie
+  - machine learning on this dataset
 - basic structure of project (everyone)
+- user registration (A. Szemalikowska)
 - connecting MySQL to Django (R. Damian)
-- connecting to IMDb film database (A. Szemalikowska, K. Fułat)
+- connecting to IMDb film database (K. Fułat)
+- integration with heroku (everyone)
 
 sprint 2: 
 - Basic UI layout (K. Dziadkowiec)
+- friends funcionality (A. Szemalikowska)
+- adding films to favorites (K. Fułat)
+- comparing and matching films between users/groups (R. Damian)
+- poster database (P. Potępa)
 
 sprint 3: 
 - machine learning implementation (P. Potepa, R. Damian)
@@ -49,7 +59,7 @@ sprint 4:
 - styling (everyone)
 - working on extra features (everyone)
 
-
+Basic requirements:
 - continuous integration with heroku
 - at least one automatic unittest (it will be automatically tested on github)
 - registration
