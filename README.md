@@ -15,7 +15,8 @@ Technology stack:
 Back-end: Django, MySQL, Heroku
 Front-end: ReactJS, TailwindCSS
 
-Features
+Features:
+
 cat 1 (core features)
 - creating and managing your account,
 - adding friends, creating friends groups,
