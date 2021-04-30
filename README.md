@@ -17,19 +17,19 @@ Front-end: ReactJS, TailwindCSS
 
 Features
 cat 1 (core features)
-creating and managing your account,
-adding friends, creating friends groups,
-searching movies
-adding films to favorites
-comparing and matching films you want to watch with films of your friends/groups
+- creating and managing your account,
+- adding friends, creating friends groups,
+- searching movies
+- adding films to favorites
+- comparing and matching films you want to watch with films of your friends/groups
 
 cat 2 (top priority)
-machine learning algorithm for predicting movie's characteristics from its cover,
-adding movies’ posters
+- machine learning algorithm for predicting movie's characteristics from its cover,
+- adding movies’ posters
 
 cat 3 (low priority)
-chat,
-dark theme
+- chat,
+- dark theme
 	
 Roadmap:
 
