@@ -32,18 +32,18 @@ chat,
 dark theme
 	
 Roadmap:
-sprint 1: 26.04 - 02.05
-basic structure of project
-connecting MySQL to Django
-connecting to IMDb film database
-sprint 2: 03.05 - 09.05
-Basic UI layout
-sprint 3: 10.05 - 16.05
-machine learning implementation
-writing tests
-sprint 4: 17.05 - 23.05
-styling
-working on extra features
+sprint 1: 
+-basic structure of project (everyone)
+-connecting MySQL to Django (R. Damian)
+-connecting to IMDb film database (A. Szemalikowska, K. Fułat)
+sprint 2: 
+-Basic UI layout (K. Dziadkowiec)
+sprint 3: 
+-machine learning implementation (P. Potepa, R. Damian)
+-writing tests (R. Damian, K. Fułat)
+sprint 4: 
+-styling (everyone)
+-working on extra features (everyone)
 
 
 - continuous integration with heroku
