@@ -30,7 +30,6 @@ def create_data():
             Y.append(genres)
         except:
             pass
-        break
 
     X = np.asarray(X)
 
