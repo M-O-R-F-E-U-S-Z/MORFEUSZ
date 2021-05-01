@@ -7,6 +7,7 @@ import glob
 import pickle
 from tqdm import tqdm
 
+
 def create_data():
     IMG_SIZE = [182, 268]
     if not os.path.exists('Pickle/'):
