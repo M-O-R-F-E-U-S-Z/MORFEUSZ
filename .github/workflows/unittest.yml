@@ -16,6 +16,6 @@ jobs:
     - name: Install
       run: |
         pip install pandas
-        pip cv2 pandas
+        pip install cv2
     - name: Test
       run: python TensorFlow/automated_unittest.py
