@@ -1,4 +1,4 @@
-import main
+import .main
 import unittest
 import pandas as pd
 
