@@ -1,6 +1,6 @@
-import .main
 import unittest
 import pandas as pd
+import main
 
 class Tests(unittest.TestCase):
     def setUp(self):
