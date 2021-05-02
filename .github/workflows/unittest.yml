@@ -16,4 +16,4 @@ jobs:
     - name: Install
       run: pip install pandas
     - name: Test
-      run: python -m unittest TensorFlow/automated_unittest.py
+      run: python TensorFlow/automated_unittest.py
