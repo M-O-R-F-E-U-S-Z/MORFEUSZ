@@ -9,12 +9,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-      with:
-        path: ./TensorFlow/
     - name: Install
       run: |
         pip install pandas
         pip install opencv-python
         pip install tqdm
     - name: Test
+      working-directory: ./TensorFlow
       run: python automated_unittest.py
