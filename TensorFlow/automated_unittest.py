@@ -4,7 +4,7 @@ import main
 
 class Tests(unittest.TestCase):
     def setUp(self):
-        self.df = pd.read_csv('Archive/MovieGenre.csv', encoding='ISO-8859-1')
+        self.df = pd.read_csv('TensorFlow/Archive/MovieGenre.csv', encoding='ISO-8859-1')
         classes = []
         for genres in self.df["Genre"].values:
             try:
