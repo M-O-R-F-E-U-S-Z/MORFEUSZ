@@ -4,7 +4,7 @@ on: push
 
 jobs:
   test:
-    name: Runn Unittest
+    name: Run Unittest
     runs-on: ubuntu-latest
 
     steps:
@@ -14,4 +14,4 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - name: Test
-      run: python -m unittest automated_unittest.py
+      run: python -m unittest TensorFlow/automated_unittest.py
