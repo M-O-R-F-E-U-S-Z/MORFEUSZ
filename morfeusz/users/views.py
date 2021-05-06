@@ -20,3 +20,10 @@ def register(request):
 @login_required
 def profile(request):
     return render(request, 'users/profile.html')
+
+def login(request):
+    return render(request, 'users/login.html')
+
+@login_required
+def logout(request):
+    return render(request, 'users/logout.html')
