@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm
+from django.contrib.auth.models import User
+
 
 
 def register(request):
@@ -27,3 +29,9 @@ def login(request):
 @login_required
 def logout(request):
     return render(request, 'users/logout.html')
+
+# @login_required
+# def send_friend_request(request, userID):
+#     from_user = request.user
+#     to_user = User.objects.get(id=userID)
+#     friends_request, created = FriendRequest.objects.get_or_create(from_user = from_user, to_user = to_user)
