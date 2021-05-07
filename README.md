@@ -70,4 +70,4 @@ Basic requirements:
   - data sources
   - how to get characteristic of the movie
   - machine learning on this dataset
-- data source connected to the database (if it's too much we can drop it)
+- data source connected to the database (if it's too much we can drop it) 
