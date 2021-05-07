@@ -35,7 +35,7 @@ cat 3 (low priority)
 	
 Roadmap:
 
-sprint 1: 
+sprint 1 (-10.05.2021): 
 - research report: (P. Potępa)
   - data sources
   - how to get characteristic of the movie
@@ -46,18 +46,18 @@ sprint 1:
 - connecting to IMDb film database (K. Fułat)
 - integration with heroku (everyone)
 
-sprint 2: 
+sprint 2 (10.05.2021 - 20.05.2021): 
 - Basic UI layout (K. Dziadkowiec)
 - friends funcionality (A. Szemalikowska)
 - adding films to favorites (K. Fułat)
 - comparing and matching films between users/groups (R. Damian)
 - poster database (P. Potępa)
 
-sprint 3: 
+sprint 3 (20.05.2021 - 31.05.2020): 
 - machine learning implementation (P. Potepa, R. Damian)
 - writing tests (R. Damian, K. Fułat)
 
-sprint 4: 
+sprint 4 (31.05.2021 - ): 
 - styling (everyone)
 - working on extra features (everyone)
 
