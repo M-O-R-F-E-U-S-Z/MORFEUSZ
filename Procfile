@@ -1,1 +1,1 @@
-web: gunicorn morfeusz.wsgi --log-file -
+web: gunicorn morfeusz.morfeusz.wsgi --log-file -
