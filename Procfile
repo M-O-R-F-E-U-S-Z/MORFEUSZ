@@ -1,1 +1,0 @@
-web: gunicorn morfeusz.morfeusz.wsgi:application --log-file - --preload 
