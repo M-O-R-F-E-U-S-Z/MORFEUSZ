@@ -83,11 +83,11 @@ WSGI_APPLICATION = 'morfeusz.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'morfeusz_database',
-        'USER': 'rafal',
-        'PASSWORD': 'password',
-        'HOST': '127.0.0.1',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd6radno2p6e92q',
+        'USER': 'tsdbbjcaxsgzgn',
+        'PASSWORD': '2b08ccf9330fe60a61859abfeeb075f4020ac83a36d12f37edf56f197973c229',
+        'HOST': 'ec2-54-154-101-45.eu-west-1.compute.amazonaws.com',
     }
 }
 
