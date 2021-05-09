@@ -83,3 +83,5 @@ wcwidth==0.2.5
 webencodings==0.5.1
 widgetsnbextension==3.5.1
 yarl==1.6.3
+gunicorn==20.1.0
+whitenoise==5.2.0
