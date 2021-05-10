@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-124_9yr!@9b8va32f&qwf)rti^0u2rbp@36)#)*7&zq%e^_j+x'
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -83,11 +83,8 @@ WSGI_APPLICATION = 'morfeusz.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd6radno2p6e92q',
-        'USER': 'tsdbbjcaxsgzgn',
-        'PASSWORD': '2b08ccf9330fe60a61859abfeeb075f4020ac83a36d12f37edf56f197973c229',
-        'HOST': 'ec2-54-154-101-45.eu-west-1.compute.amazonaws.com',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -144,4 +141,4 @@ LOGOUT_REDIRECT_URL = ''
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-ALLOWED_HOSTS = ['morfeusz.herokuapp.com']
+ALLOWED_HOSTS = ['morfeusz.herokuapp.com', 'localhost']

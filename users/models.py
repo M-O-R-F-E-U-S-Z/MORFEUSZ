@@ -2,6 +2,8 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.conf import settings
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 class FriendList(models.Model):
@@ -36,6 +38,12 @@ class FriendList(models.Model):
         return False
 
 
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        FriendList.objects.create(user=instance)
+
+
 class FriendRequest(models.Model):
     sender = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="sender")
     receiver = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="receiver")
@@ -56,6 +64,7 @@ class FriendRequest(models.Model):
                 sender_friend_list.add_friend(self.receiver)
                 self.is_active = False
                 self.save()
+
     def decline(self):
         self.is_active = False
         self.save()
@@ -66,37 +75,6 @@ class FriendRequest(models.Model):
         self.save()
 
 
-# Create your models here.
-# First
-
-# class MyUser(User):
-#     friends = models.ManyToManyField(User, blank=True)
-#
-#
-# class FriendRequest(models.Model):
-#     from_user = models.ForeignKey(User, related_name='from_user', on_delete=models.CASCADE)
-#     to_user = models.ForeignKey(User, related_name='to_user', on_delete=models.CASCADE)
-
-# class Friend(models.Model):
-#     users = models.ManyToManyField(User)
-#     current_user = models.ForeignKey(User, related_name="owner", null=True, on_delete=models.CASCADE)
-#
-#     @classmethod
-#     def make_friend(cls, current_user, new_friend):
-#         friend, created = cls.objects.get_or_create(
-#             current_user=current_user
-#         )
-#         friend.users.add(new_friend)
-#
-#     @classmethod
-#     def remove_friend(cls, current_user, new_friend):
-#         friend, created = cls.objects.get_or_create(
-#             current_user=current_user
-#         )
-#         friend.users.remove(new_friend)
-#
-#     def __str__(self):
-#         return str(self.current_user)
 
 
 
