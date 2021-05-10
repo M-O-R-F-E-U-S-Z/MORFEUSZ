@@ -2,4 +2,8 @@ dir_to_ignore/.idea
 env
 *__pycache__
 *.whl
+<<<<<<< HEAD
 db.sqlite3
+=======
+db.sqlite3
+>>>>>>> 3aab5ebb5180e61df23dcdbb361f9deb6c0a6584
