@@ -5,7 +5,7 @@ from .forms import UserRegisterForm
 from django.contrib.auth.models import User
 from users.models import FriendRequest
 from django.http import HttpResponse
-import json
+#import json
 
 
 def register(request):
@@ -36,35 +36,50 @@ def logout(request):
 
 
 @login_required
-def send_friend_request(request):
+def send_friend_request(request, receiver_id):
     user = request.user
     payload = {}
     if request.method == "POST" and user.is_authenticated:
-        user_id = request.POST.get("receiver_user_id")
-        if user_id:
-            receiver = User.objects.get(pk=user_id)
-            try:
-                # get all friend request
-                friend_request = FriendRequest.objects.filter(sender=user, receiver=receiver)
-                try:
-                    for request in friend_request:
-                        if request.is_active:
-                            raise Exception("You already sent them a friend request.")
-                    friend_request = FriendRequest(sender=user, receiver=receiver)
-                    friend_request.save()
-                    payload['response'] = "Friend request sent."
-                except Exception as e:
-                    payload['response'] = str(e)
-            except FriendRequest.DoesNotExist:
-                friend_request = FriendRequest(sender=user, receiver=receiver)
-                friend_request.save()
-
-                if payload['response'] is None:
-                    payload['response'] = "Something went wrong"
+        if receiver_id:
+            receiver = User.objects.get(id=receiver_id)
+            friend_request, created = FriendRequest.objects.get_or_create(sender=user, receiver=receiver)
+            if created:
+                return HttpResponse('Friend request sent')
+            elif friend_request.is_active:
+                return HttpResponse('Friend request already sent')
+            else:
+                return HttpResponse('Friend request sent')
         else:
-            payload['response'] = "Unable to send a friend request."
+            return HttpResponse('Unable to sent friend request')
     else:
-        payload['response'] = "You are not authenticated"
-    return HttpResponse(json.dumps(payload), content_type="application/")
+        return HttpResponse('You are not authorized')
 
 
+@login_required
+def accept_friend_request(request, request_id):
+    friend_request = FriendRequest.objects.get(id=request_id)
+    if friend_request.receiver == request.user:
+        friend_request.accept()
+        return HttpResponse('Friend request accepted')
+    else:
+        return HttpResponse("You can't accept request that is not sent to you.")
+
+
+@login_required
+def decline_friend_request(request, request_id):
+    friend_request = FriendRequest.objects.get(id=request_id)
+    if friend_request.receiver == request.user:
+        friend_request.deactivate()
+        return HttpResponse('Friend request declined')
+    else:
+        return HttpResponse("You can't decline request that is not sent to you.")
+
+
+@login_required
+def cancel_friend_request(request, request_id):
+    friend_request = FriendRequest.objects.get(id=request_id)
+    if friend_request.sender == request.user:
+        friend_request.deactivate()
+        return HttpResponse('Friend request canceled')
+    else:
+        return HttpResponse("You can't cancel request that is you didn't create.")

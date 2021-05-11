@@ -65,14 +65,10 @@ class FriendRequest(models.Model):
                 self.is_active = False
                 self.save()
 
-    def decline(self):
+    def deactivate(self):
         self.is_active = False
         self.save()
 
-    def cancel(self):
-        # Different to cancel only through notification
-        self.is_active = False
-        self.save()
 
 
 
