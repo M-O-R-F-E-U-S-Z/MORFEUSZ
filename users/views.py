@@ -38,21 +38,14 @@ def logout(request):
 @login_required
 def send_friend_request(request, receiver_id):
     user = request.user
-    payload = {}
-    if request.method == "POST" and user.is_authenticated:
-        if receiver_id:
-            receiver = User.objects.get(id=receiver_id)
-            friend_request, created = FriendRequest.objects.get_or_create(sender=user, receiver=receiver)
-            if created:
-                return HttpResponse('Friend request sent')
-            elif friend_request.is_active:
-                return HttpResponse('Friend request already sent')
-            else:
-                return HttpResponse('Friend request sent')
-        else:
-            return HttpResponse('Unable to sent friend request')
+    receiver = User.objects.get(id=receiver_id)
+    friend_request, created = FriendRequest.objects.get_or_create(sender=user, receiver=receiver)
+    if created:
+        return HttpResponse('Friend request sent')
+    elif friend_request.is_active:
+        return HttpResponse('Friend request already sent')
     else:
-        return HttpResponse('You are not authorized')
+        return HttpResponse('Friend request sent')
 
 
 @login_required
