@@ -20,8 +20,6 @@ from django.contrib import admin
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('register/', user_views.register, name='register'),
-    # path('profile/', user_views.profile, name='profile'),
     path('users/', include('users.urls')),
     path('', include('morfeusz_app.urls')),
 
