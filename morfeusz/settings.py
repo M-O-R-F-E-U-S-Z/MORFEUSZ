@@ -144,4 +144,4 @@ LOGOUT_REDIRECT_URL = ''
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-ALLOWED_HOSTS = ['morfeusz.herokuapp.com', 'localhost']
+ALLOWED_HOSTS = ['morfeusz.herokuapp.com', 'localhost', '127.0.0.1']
