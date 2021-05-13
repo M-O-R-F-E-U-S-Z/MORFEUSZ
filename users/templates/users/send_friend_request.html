@@ -1,22 +1,4 @@
-{#<ul class="all_users">#}
-{#    {% for user in all_users %}#}
-{#    {% if not user.is_superuser %}#}
-{#    {% if user not in request.user.friends.all and user != request.user%}#}
-{#    <h1>#}
-{#        {{ user }} <a href="/send_friend_request/{{user.id}}">send friend request</a>#}
-{#    </h1>#}
-{#    {% endif %}#}
-{#    {% endif %}#}
-{#    {% endfor %}#}
-{#</ul>#}
-
-{##}
-{#    <h1>{{ user.username }}</h1>#}
-{#    {% for list_user in list_of_users %}#}
-{#        {{ list_user }}<br>#}
-{#    {% endfor %}#}
-{#    {{ form }}#}
-
+{% extends "morfeusz_app/base.html" %}
 {% block content %}
     <h1>Send friend request</h1>
 <div class="content-section">
