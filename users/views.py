@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .forms import UserRegisterForm
+from .forms import UserRegisterForm, FriendRequestForm
 from django.contrib.auth.models import User
-from users.models import FriendRequest
+from users.models import FriendRequest, FriendList
 from django.http import HttpResponse
 #import json
 
@@ -23,7 +23,25 @@ def register(request):
 
 @login_required
 def profile(request):
-    return render(request, 'users/profile.html')
+    context = {}
+    friend_requests = FriendRequest.objects.all()
+    request_to = []
+    request_from = []
+    user = request.user
+    friends_list = FriendList.objects.all()
+    for friend in friends_list:
+        if friend.user == user:
+            friend_list = friend
+
+    for fr_req in friend_requests:
+        if fr_req.sender == user and fr_req.is_active:
+            request_to.append(fr_req)
+        elif fr_req.receiver == user and fr_req.is_active:
+            request_from.append(fr_req)
+    context['request_to'] = request_to
+    context['request_from'] = request_from
+    context['friend_list'] = friend_list
+    return render(request, 'users/profile.html', context)
 
 
 def login(request):
@@ -36,16 +54,23 @@ def logout(request):
 
 
 @login_required
-def send_friend_request(request, receiver_id):
+def send_friend_request(request):
     user = request.user
-    receiver = User.objects.get(id=receiver_id)
-    friend_request, created = FriendRequest.objects.get_or_create(sender=user, receiver=receiver)
-    if created:
-        return HttpResponse('Friend request sent')
-    elif friend_request.is_active:
-        return HttpResponse('Friend request already sent')
+    if request.method == "POST":
+        form = FriendRequestForm(request.POST)
+        if form.is_valid():
+            receiver_username = form.cleaned_data.get("receiver")
+            receiver = User.objects.get(username=receiver_username)
+            friend_request, created = FriendRequest.objects.get_or_create(sender=user, receiver=receiver)
+            if created:
+                return HttpResponse('Friend request sent')
+            elif friend_request.is_active:
+                return HttpResponse('Friend request is already sent')
+            else:
+                return HttpResponse('Friend request sent')
     else:
-        return HttpResponse('Friend request sent')
+        form = FriendRequestForm()
+    return render(request, 'users/send_friend_request.html', {'form': form})
 
 
 @login_required
