@@ -83,11 +83,8 @@ WSGI_APPLICATION = 'morfeusz.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'da8nconqug55dd',
-        'USER': 'exlmuorynvkrkd',
-        'PASSWORD': '84acff3f290abd43c215509e92fe83d11e30d66a62f881f9941e1fd1f501e9f6',
-        'HOST': 'ec2-54-220-35-19.eu-west-1.compute.amazonaws.com',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 

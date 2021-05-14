@@ -8,8 +8,8 @@ from django.dispatch import receiver
 
 class FriendList(models.Model):
 
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="user")
-    friends = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name="friends")
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="user")
+    friends = models.ManyToManyField(User, blank=True, related_name="friends")
 
     def __str__(self):
         return self.user.username
