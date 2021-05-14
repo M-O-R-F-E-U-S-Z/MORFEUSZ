@@ -84,10 +84,10 @@ WSGI_APPLICATION = 'morfeusz.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd6radno2p6e92q',
-        'USER': 'tsdbbjcaxsgzgn',
-        'PASSWORD': '2b08ccf9330fe60a61859abfeeb075f4020ac83a36d12f37edf56f197973c229',
-        'HOST': 'ec2-54-154-101-45.eu-west-1.compute.amazonaws.com',
+        'NAME': 'da8nconqug55dd',
+        'USER': 'exlmuorynvkrkd',
+        'PASSWORD': '84acff3f290abd43c215509e92fe83d11e30d66a62f881f9941e1fd1f501e9f6',
+        'HOST': 'ec2-54-220-35-19.eu-west-1.compute.amazonaws.com',
     }
 }
 
