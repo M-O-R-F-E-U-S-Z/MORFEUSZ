@@ -12,7 +12,7 @@ class UserRegisterForm(UserCreationForm):
 
 
 class FriendRequestForm(forms.Form):
-    users = User.objects.username()
+    users = User.objects.all()
     USER_LIST = [f"username: {user}" for user in users]
     receiver = forms.CharField(label="To whom do you want send a friend request?")
     pass
