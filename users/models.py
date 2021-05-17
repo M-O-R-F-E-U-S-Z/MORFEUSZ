@@ -6,6 +6,20 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="user")
+    profile_picture = models.ImageField(upload_to='profile_pictures/')
+    background_picture = models.ImageField(upload_to='background_pictures/')
+
+    # films_dont_like = models.ManyToManyField(Film, on_delete=models.CASCADE)
+    # films_like_dont_watch = models.ManyToManyField(Film, on_delete=models.CASCADE)
+    # films_like_watch = models.ManyToManyField(Film, on_delete=models.CASCADE)
+    # films_watch = models.ManyToManyField(Film, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.user.username
+
+
 class FriendList(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="user")
@@ -42,11 +56,12 @@ class FriendList(models.Model):
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         FriendList.objects.create(user=instance)
+        Profile.objects.create(user=instance)
 
 
 class FriendRequest(models.Model):
-    sender = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="sender")
-    receiver = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="receiver")
+    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name="sender")
+    receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name="receiver")
 
     is_active = models.BooleanField(blank=True, null=False, default=True)
 
