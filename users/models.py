@@ -17,7 +17,7 @@ class Profile(models.Model):
     # films_watch = models.ManyToManyField(Film, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.user.username
+        return self.user_profile.username
 
 
 class FriendList(models.Model):
