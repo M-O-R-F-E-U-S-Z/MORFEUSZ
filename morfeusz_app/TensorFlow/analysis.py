@@ -1,5 +1,4 @@
 import numpy as np
-import matplotlib.pyplot as plt
 import tensorflow as tf
 from tensorflow.keras.callbacks import TensorBoard
 import random
@@ -7,10 +6,6 @@ import os
 import cv2
 import glob
 import pickle
-from sklearn.preprocessing import MultiLabelBinarizer
-from sklearn.utils.class_weight import compute_sample_weight, compute_class_weight
-from collections import Counter
-from sklearn.preprocessing import LabelEncoder
 import logging
 
 import data_manager
