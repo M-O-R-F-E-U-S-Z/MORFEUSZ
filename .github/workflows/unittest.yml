@@ -16,6 +16,7 @@ jobs:
         pip install tqdm
         pip install matplotlib
         pip install tensorflow
+        pip install sklearn
     - name: Test
       working-directory: ./morfeusz_app/TensorFlow
       run: python automated_unittest.py
