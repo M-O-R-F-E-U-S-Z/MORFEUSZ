@@ -14,6 +14,7 @@ jobs:
         pip install pandas
         pip install opencv-python
         pip install tqdm
+        pip install matplotlib
     - name: Test
       working-directory: ./morfeusz_app/TensorFlow
       run: python automated_unittest.py
