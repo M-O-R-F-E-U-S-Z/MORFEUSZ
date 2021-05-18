@@ -1,6 +1,8 @@
 Project: MORFEUSZ
 (Movies Open Reliable Finder Extra User-friendly Search-engine Zero)
 
+available at: morfeusz.herokuapp.com
+
 Participants:
 Rafał Damian (tl),
 Alicja Szemalikowska,
@@ -13,7 +15,7 @@ Short description of the idea:
 Tinder for movies. App for deciding what movies to watch with Your friends, based on Your preferences.
 
 Technology stack:
-- Back-end: Django, MySQL, Heroku
+- Back-end: Django, PostgreSQL, Heroku
 - Front-end: ReactJS, TailwindCSS
 
 Features:
@@ -42,9 +44,9 @@ sprint 1 (-10.05.2021):
   - machine learning on this dataset
 - basic structure of project (everyone)
 - user registration (A. Szemalikowska)
-- connecting MySQL to Django (R. Damian)
+- connecting PostgreSQL to Django and Heroku(R. Damian)
 - connecting to IMDb film database (K. Fułat)
-- integration with heroku (everyone)
+- integration with heroku (R. Damian)
 
 sprint 2 (10.05.2021 - 20.05.2021): 
 - Basic UI layout (K. Dziadkowiec)

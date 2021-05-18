@@ -1,0 +1,23 @@
+{% extends "morfeusz_app/base.html" %}
+{% block content %}
+    <h1>{{ user.username }}</h1>
+<a class="nav-item nav-link" href="{% url 'users:send_friend_request' %}">Send friend request</a><br>
+
+    <h2> Friend request sent to: </h2>
+{% for fr_req in request_to %}
+    {{ fr_req.receiver }}<a href="/users/cancel_friend_request/{{ fr_req.id }}">Cancel</a> <br>
+{#    {{ fr_req }} <a href="/users/accept_friend_request/1234">Cancel</a> <br>#}
+{% endfor %}
+
+
+    <h2> Friend request sent from: </h2>
+{% for fr_req in request_from %}
+    {{ fr_req }} <a href="/users/accept_friend_request/{{ fr_req.id }}">Accept</a> <a href="/users/decline_friend_request/{{ fr_req.id }}">Decline</a> <br>
+{% endfor %}
+
+    <h2> Friends: </h2>
+    {% for friend in friend_list.friends.all %}
+    {{ friend }} <br>
+    {% endfor %}
+
+{% endblock content %}
