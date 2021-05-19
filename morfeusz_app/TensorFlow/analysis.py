@@ -1,7 +1,5 @@
 import numpy as np
 import tensorflow as tf
-from tensorflow.keras.callbacks import TensorBoard
-import random
 import os
 import cv2
 import glob
