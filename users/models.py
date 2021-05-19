@@ -22,7 +22,7 @@ class Profile(models.Model):
 
 class FriendList(models.Model):
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="user")
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="user_profile")
     friends = models.ManyToManyField(User, blank=True, related_name="friends")
 
     def __str__(self):
