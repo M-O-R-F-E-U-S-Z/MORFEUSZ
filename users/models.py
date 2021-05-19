@@ -7,7 +7,7 @@ from django.dispatch import receiver
 
 
 class Profile(models.Model):
-    user_profile = models.OneToOneField(User, on_delete=models.CASCADE, related_name="user_profile")
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="user")
     profile_picture = models.ImageField(upload_to='profile_pictures/')
     background_picture = models.ImageField(upload_to='background_pictures/')
 
@@ -17,7 +17,7 @@ class Profile(models.Model):
     # films_watch = models.ManyToManyField(Film, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.user_profile.username
+        return self.user.username
 
 
 class FriendList(models.Model):
