@@ -29,6 +29,7 @@ def profile(request):
     request_from = []
     user = request.user
     friends_list = FriendList.objects.all()
+    friend_list = None
     for friend in friends_list:
         if friend.user == user:
             friend_list = friend
@@ -60,14 +61,17 @@ def send_friend_request(request):
         form = FriendRequestForm(request.POST)
         if form.is_valid():
             receiver_username = form.cleaned_data.get("receiver")
-            receiver = User.objects.get(username=receiver_username)
-            friend_request, created = FriendRequest.objects.get_or_create(sender=user, receiver=receiver)
-            if created:
-                return HttpResponse('Friend request sent')
-            elif friend_request.is_active:
-                return HttpResponse('Friend request is already sent')
+            if receiver_username in User.objects.all():
+                receiver = User.objects.get(username=receiver_username)
+                friend_request, created = FriendRequest.objects.get_or_create(sender=user, receiver=receiver)
+                if created:
+                    return HttpResponse('Friend request sent')
+                elif friend_request.is_active:
+                    return HttpResponse('Friend request is already sent')
+                else:
+                    return HttpResponse('Friend request sent')
             else:
-                return HttpResponse('Friend request sent')
+                return HttpResponse('There is no such user')
     else:
         form = FriendRequestForm()
     return render(request, 'users/send_friend_request.html', {'form': form})
@@ -101,3 +105,15 @@ def cancel_friend_request(request, request_id):
         return HttpResponse('Friend request canceled')
     else:
         return HttpResponse("You can't cancel request that is you didn't create.")
+
+
+@login_required
+def unfriend(request, friend_id):
+    user = request.user
+    friend = User.objects.get(id=friend_id)
+    friend_list = FriendList.objects.get(user=user)
+    if friend in friend_list.friends.all():
+        friend_list.unfriend(friend)
+        return HttpResponse('Friend deleted')
+    else:
+        return HttpResponse("It's not your friend")

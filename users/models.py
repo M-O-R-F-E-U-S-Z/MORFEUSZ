@@ -85,8 +85,19 @@ class FriendRequest(models.Model):
         self.save()
 
 
+class Group(models.Model):
 
+    name = models.CharField(max_length=30)
+    members = models.ManyToManyField(User, related_name="members")
 
+    def __str__(self):
+        return self.members.username
 
+    def add_member(self, account):
+        if account not in self.members.all():
+            self.members.add(account)
 
+    def remove_member(self, account):
+        if account in self.members.all():
+            self.members.remove(account)
 

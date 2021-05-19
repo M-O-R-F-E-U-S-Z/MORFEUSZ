@@ -17,7 +17,7 @@
 
     <h2> Friends: </h2>
     {% for friend in friend_list.friends.all %}
-    {{ friend }} <br>
+    {{ friend }} <a href="/users/unfriend/{{ friend.id }}">Unfriend</a> <br>
     {% endfor %}
 
 {% endblock content %}
