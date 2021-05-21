@@ -14,7 +14,7 @@ def register(request):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
-            messages.success(request, f'Your account has already been created. Try to log in!')
+            messages.success(request, f'Your account has been created. Try to log in!')
             return redirect('morfeusz_app-home')
     else:
         form = UserRegisterForm()
@@ -68,9 +68,10 @@ def send_friend_request(request):
                     return HttpResponse('Friend request sent')
                 elif friend_request.is_active:
                     return HttpResponse('Friend request is already sent')
+                elif FriendList.objects.get(user=user).is_mutual_friend(receiver):
+                    return HttpResponse('You are friends with that user')
                 else:
                     friend_request.is_active = True
-
                     return HttpResponse('Friend request sent')
             else:
                 return HttpResponse('There is no such user')

@@ -1,23 +1,18 @@
 from django.db import models
-from django.utils import timezone
 from django.contrib.auth.models import User
-from django.conf import settings
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from morfeusz_app.models import Movie
+import random
+import string
 
 
 class Profile(models.Model):
     user_profile = models.OneToOneField(User, on_delete=models.CASCADE, related_name="user_profile")
-    profile_picture = models.ImageField(upload_to='profile_pictures/')
-    background_picture = models.ImageField(upload_to='background_pictures/')
-
-    # films_dont_like = models.ManyToManyField(Film, on_delete=models.CASCADE)
-    # films_like_dont_watch = models.ManyToManyField(Film, on_delete=models.CASCADE)
-    # films_like_watch = models.ManyToManyField(Film, on_delete=models.CASCADE)
-    # films_watch = models.ManyToManyField(Film, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.user_profile.username
+    movies_dont_like = models.ManyToManyField(Movie, related_name="linked_profiles_dont_like")
+    movies_like_dont_watch = models.ManyToManyField(Movie, related_name="linked_profiles_like_dont_watch")
+    movies_like_watch = models.ManyToManyField(Movie, related_name="linked_profiles_like_watch")
+    movies_watch = models.ManyToManyField(Movie, related_name="linked_profiles_watch")
 
 
 class FriendList(models.Model):
@@ -56,7 +51,6 @@ class FriendList(models.Model):
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         FriendList.objects.create(user=instance)
-        Profile.objects.create(user=instance)
 
 
 class FriendRequest(models.Model):
@@ -85,9 +79,19 @@ class FriendRequest(models.Model):
         self.save()
 
 
+def generate_unique_code():
+    length = 6
+    while True:
+        new_code = ''.join(random.choises(string.ascii_uppercase, k=length))
+        if Group.objects.filter(code=new_code).exists():
+            break
+    return new_code
+
+
 class Group(models.Model):
 
-    name = models.CharField(max_length=30)
+    code = models.CharField(max_length=8, default="", unique=True)
+    name = models.CharField(max_length=30,  default="")
     members = models.ManyToManyField(User, related_name="members")
 
     def __str__(self):
