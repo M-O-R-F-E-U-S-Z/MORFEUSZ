@@ -61,7 +61,7 @@ def send_friend_request(request):
         form = FriendRequestForm(request.POST)
         if form.is_valid():
             receiver_username = form.cleaned_data.get("receiver")
-            if receiver_username in User.objects.all():
+            if User.objects.filter(username=receiver_username).exists():
                 receiver = User.objects.get(username=receiver_username)
                 friend_request, created = FriendRequest.objects.get_or_create(sender=user, receiver=receiver)
                 if created:
@@ -69,6 +69,8 @@ def send_friend_request(request):
                 elif friend_request.is_active:
                     return HttpResponse('Friend request is already sent')
                 else:
+                    friend_request.is_active = True
+
                     return HttpResponse('Friend request sent')
             else:
                 return HttpResponse('There is no such user')

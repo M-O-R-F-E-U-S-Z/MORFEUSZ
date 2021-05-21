@@ -56,7 +56,7 @@ class FriendList(models.Model):
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         FriendList.objects.create(user=instance)
-        Profile.objects.create(user=instance)
+        Profile.objects.create(user_profile=instance)
 
 
 class FriendRequest(models.Model):
