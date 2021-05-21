@@ -63,16 +63,21 @@ def send_friend_request(request):
             receiver_username = form.cleaned_data.get("receiver")
             if User.objects.filter(username=receiver_username).exists():
                 receiver = User.objects.get(username=receiver_username)
-                friend_request, created = FriendRequest.objects.get_or_create(sender=user, receiver=receiver)
-                if created:
-                    return HttpResponse('Friend request sent')
-                elif friend_request.is_active:
-                    return HttpResponse('Friend request is already sent')
-                elif FriendList.objects.get(user=user).is_mutual_friend(receiver):
+                if FriendList.objects.get(user=user).is_mutual_friend(receiver):
                     return HttpResponse('You are friends with that user')
+                elif FriendRequest.objects.filter(sender=receiver, receiver=user):
+                    return HttpResponse('This user send you a friend request, accept it instead of sending a new one!')
                 else:
-                    friend_request.is_active = True
-                    return HttpResponse('Friend request sent')
+                    friend_request, created = FriendRequest.objects.get_or_create(sender=user, receiver=receiver)
+                    if created:
+                        return HttpResponse('Friend request sent')
+                    elif friend_request.is_active:
+                        return HttpResponse('Friend request is already sent')
+                    else:
+                        # friend_request.is_active = True
+                        friend_request.delete()
+                        FriendRequest.objects.create(sender=user, receiver=receiver)
+                        return HttpResponse('Friend request sent again')
             else:
                 return HttpResponse('There is no such user')
     else:

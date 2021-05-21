@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from morfeusz_app.models import Movie
+from django.conf import settings
 import random
 import string
 
@@ -13,6 +14,9 @@ class Profile(models.Model):
     movies_like_dont_watch = models.ManyToManyField(Movie, related_name="linked_profiles_like_dont_watch")
     movies_like_watch = models.ManyToManyField(Movie, related_name="linked_profiles_like_watch")
     movies_watch = models.ManyToManyField(Movie, related_name="linked_profiles_watch")
+
+    # profile_picture = models.ImageField(upload_to='profile_pictures/')
+    # background_picture = models.ImageField(upload_to='background_pictures/')
 
 
 class FriendList(models.Model):
