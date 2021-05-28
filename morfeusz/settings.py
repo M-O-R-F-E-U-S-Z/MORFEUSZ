@@ -15,7 +15,7 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-PROJECT_ROOT   =   os.path.join(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.join(os.path.abspath(__file__))
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -84,13 +84,20 @@ WSGI_APPLICATION = 'morfeusz.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'd9nich36iddmav',
+#         'USER': 'zzspaojwzkemdi',
+#         'PASSWORD': 'c0101243dd8a2f8e1abb9b745cbb6713b2742d2fc0f5ea08d654e79eb258611b',
+#         'HOST': 'ec2-52-50-171-4.eu-west-1.compute.amazonaws.com',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd9nich36iddmav',
-        'USER': 'zzspaojwzkemdi',
-        'PASSWORD': 'c0101243dd8a2f8e1abb9b745cbb6713b2742d2fc0f5ea08d654e79eb258611b',
-        'HOST': 'ec2-52-50-171-4.eu-west-1.compute.amazonaws.com',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
