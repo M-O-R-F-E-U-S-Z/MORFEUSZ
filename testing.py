@@ -13,7 +13,7 @@ print(Movie.objects.all().count())
 # profile = Profile(user_profile=user)
 # profile.save()
 print(User.objects.all())
-user = User.objects.filter(username='user3').first()
+user = User.objects.filter(username='test_user_1').first()
 profile = user.user_profile
 # profile.movies_like_watch.all().delete()
 # profile.movies_dont_like.clear()
