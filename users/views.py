@@ -5,7 +5,10 @@ from .forms import UserRegisterForm, FriendRequestForm
 from django.contrib.auth.models import User
 from users.models import FriendRequest, FriendList
 from django.http import HttpResponse
-#import json
+from morfeusz_app.models import Movie
+from .models import Profile
+from django.db.models import Max
+import random
 
 
 def register(request):
@@ -14,11 +17,82 @@ def register(request):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
+            user = User.objects.filter(username=username).first()
+            profile = Profile(user_profile=user)
+            profile.save()
             messages.success(request, f'Your account has been created. Try to log in!')
             return redirect('morfeusz_app-home')
     else:
         form = UserRegisterForm()
     return render(request, 'users/register.html', {'form': form})
+
+
+# def get_random_movie():
+#     max_id = Movie.objects.all().aggregate(max_id=Max("id"))['max_id']
+#     while True:
+#         pk = random.randint(1, max_id)
+#         movie = Movie.objects.filter(pk=pk).first()
+#         if movie:
+#             return movie
+
+@login_required
+def movie_qualification(request):
+    user = request.user
+    movies_pk = [mv.pk for mv in Movie.objects.all()]
+    user_movies_pk = user.user_profile.all_movies_pk()
+    movies_pk = list(set(movies_pk)-set(user_movies_pk))
+    if not movies_pk == []:
+        movie_pk = random.choice(movies_pk)
+        movie = Movie.objects.filter(pk=movie_pk).first()
+        request.session['movie_pk'] = movie_pk
+        context = {'movie': movie}
+        return render(request, 'users/movie_qualification.html', context)
+    else:
+        return HttpResponse("No more movies to qualification.")
+
+
+@login_required
+def movies_dont_like(request):
+    user = request.user
+    movie_pk = request.session.get('movie_pk', None)
+    movie = Movie.objects.filter(pk=movie_pk).first()
+    profile = user.user_profile
+    profile.movies_dont_like.add(movie)
+    profile.save()
+    return redirect('users:movie_qualification')
+
+
+@login_required
+def movies_like_dont_watch(request):
+    user = request.user
+    movie_pk = request.session.get('movie_pk', None)
+    movie = Movie.objects.filter(pk=movie_pk).first()
+    profile = user.user_profile
+    profile.movies_like_dont_watch.add(movie)
+    profile.save()
+    return redirect('users:movie_qualification')
+
+
+@login_required
+def movies_like_watch(request):
+    user = request.user
+    movie_pk = request.session.get('movie_pk', None)
+    movie = Movie.objects.filter(pk=movie_pk).first()
+    profile = user.user_profile
+    profile.movies_like_watch.add(movie)
+    profile.save()
+    return redirect('users:movie_qualification')
+
+
+@login_required
+def movies_watch(request):
+    user = request.user
+    movie_pk = request.session.get('movie_pk', None)
+    movie = Movie.objects.filter(pk=movie_pk).first()
+    profile = user.user_profile
+    profile.movies_watch.add(movie)
+    profile.save()
+    return redirect('users:movie_qualification')
 
 
 @login_required
@@ -68,7 +142,8 @@ def send_friend_request(request):
                 elif FriendRequest.objects.filter(sender=receiver, receiver=user):
                     return HttpResponse('This user send you a friend request, accept it instead of sending a new one!')
                 else:
-                    friend_request, created = FriendRequest.objects.get_or_create(sender=user, receiver=receiver)
+                    friend_request, created = FriendRequest.objects.get_or_create(
+                        sender=user, receiver=receiver)
                     if created:
                         return HttpResponse('Friend request sent')
                     elif friend_request.is_active:

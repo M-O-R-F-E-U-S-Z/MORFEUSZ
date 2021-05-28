@@ -73,3 +73,15 @@ Basic requirements:
   - how to get characteristic of the movie
   - machine learning on this dataset
 - data source connected to the database (if it's too much we can drop it) 
+
+100% requirements:
+- debug turned to off
+- think about the implementation of ml model for the web service
+- ml research and modelling
+- merging the ml part of the project with the web servibe
+- make better fronted
+- the core functionality of suggesting some actual films for a group of people
+- and all of the features in the readme
+- automatic tests (50% at least)
+- all of that working on heroku
+ 

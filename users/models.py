@@ -11,9 +11,22 @@ import string
 class Profile(models.Model):
     user_profile = models.OneToOneField(User, on_delete=models.CASCADE, related_name="user_profile")
     movies_dont_like = models.ManyToManyField(Movie, related_name="linked_profiles_dont_like")
-    movies_like_dont_watch = models.ManyToManyField(Movie, related_name="linked_profiles_like_dont_watch")
+    movies_like_dont_watch = models.ManyToManyField(
+        Movie, related_name="linked_profiles_like_dont_watch")
     movies_like_watch = models.ManyToManyField(Movie, related_name="linked_profiles_like_watch")
     movies_watch = models.ManyToManyField(Movie, related_name="linked_profiles_watch")
+
+    def all_movies_pk(self):
+        movies_pk = []
+        for mv in self.movies_dont_like.all():
+            movies_pk.append(mv.pk)
+        for mv in self.movies_like_dont_watch.all():
+            movies_pk.append(mv.pk)
+        for mv in self.movies_like_watch.all():
+            movies_pk.append(mv.pk)
+        for mv in self.movies_watch.all():
+            movies_pk.append(mv.pk)
+        return movies_pk
 
     # profile_picture = models.ImageField(upload_to='profile_pictures/')
     # background_picture = models.ImageField(upload_to='background_pictures/')
@@ -108,4 +121,3 @@ class Group(models.Model):
     def remove_member(self, account):
         if account in self.members.all():
             self.members.remove(account)
-
