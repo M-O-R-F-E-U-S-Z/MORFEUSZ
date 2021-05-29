@@ -1,5 +1,16 @@
 {% extends "morfeusz_app/base.html" %}
+{% load static %}
 {% block content %}
+
+{#    <style>#}
+{#.cover {#}
+{#  background-image: url('{% static background %}');}#}
+{#</style>#}
+{#<div class="cover">#}
+
+
+
+
     <h1>{{ user.username }}</h1>
 <a class="nav-item nav-link" href="{% url 'users:send_friend_request' %}">Send friend request</a><br>
 <a class="btn btn-primary" href="{% url 'users:movie_qualification' %}">Qualify movies</a>
@@ -8,7 +19,7 @@
     <h2> Friend request sent to: </h2>
 {% for fr_req in request_to %}
     {{ fr_req.receiver }}<a href="/users/cancel_friend_request/{{ fr_req.id }}">Cancel</a> <br>
-{#    {{ fr_req }} <a href="/users/accept_friend_request/1234">Cancel</a> <br>#}
+
 {% endfor %}
 
 
@@ -21,5 +32,8 @@
     {% for friend in friend_list.friends.all %}
     {{ friend }} <a href="/users/unfriend/{{ friend.id }}">Unfriend</a> <br>
     {% endfor %}
-
+</div>
 {% endblock content %}
+
+
+{#</BODY>#}

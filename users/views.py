@@ -116,6 +116,11 @@ def profile(request):
     context['request_to'] = request_to
     context['request_from'] = request_from
     context['friend_list'] = friend_list
+
+    if Profile.objects.filter(user_profile=user).exists():
+        profile = user.user_profile
+        background = profile.background_picture
+        context['background'] = background
     return render(request, 'users/profile.html', context)
 
 

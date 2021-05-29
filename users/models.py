@@ -28,8 +28,8 @@ class Profile(models.Model):
             movies_pk.append(mv.pk)
         return movies_pk
 
-    # profile_picture = models.ImageField(upload_to='profile_pictures/')
-    # background_picture = models.ImageField(upload_to='background_pictures/')
+    profile_picture = models.ImageField(upload_to='profile_pictures/', default='profile_pictures/default_profile.jpg')
+    background_picture = models.ImageField(upload_to='background_pictures/', default='background_pictures/default_background.jpg')
 
 
 class FriendList(models.Model):
