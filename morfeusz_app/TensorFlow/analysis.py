@@ -8,12 +8,13 @@ import logging
 
 import data_manager
 
+MODEL_EXTENSION = '.hp5'
 
 def prediction(layer_size, conv_layer, dense_layer):
 
     X, Y = data_manager.load_data()               
     NAME = '{}nodes-{}conv-{}dense'.format(layer_size, conv_layer, dense_layer)
-    model = tf.keras.models.load_model('Models/Model_{}.hp5'.format(NAME))
+    model = tf.keras.models.load_model('Models/Model_{}{}'.format(NAME, MODEL_EXTENSION))
     pred = model.predict([X])
 
     for i in range(len(X)):
