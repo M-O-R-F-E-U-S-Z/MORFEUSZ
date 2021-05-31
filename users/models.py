@@ -4,8 +4,6 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from morfeusz_app.models import Movie
 from django.conf import settings
-import random
-import string
 
 
 class Profile(models.Model):
@@ -96,28 +94,7 @@ class FriendRequest(models.Model):
         self.save()
 
 
-def generate_unique_code():
-    length = 6
-    while True:
-        new_code = ''.join(random.choises(string.ascii_uppercase, k=length))
-        if Group.objects.filter(code=new_code).exists():
-            break
-    return new_code
 
 
-class Group(models.Model):
 
-    code = models.CharField(max_length=8, default="", unique=True)
-    name = models.CharField(max_length=30,  default="")
-    members = models.ManyToManyField(User, related_name="members")
 
-    def __str__(self):
-        return self.members.username
-
-    def add_member(self, account):
-        if account not in self.members.all():
-            self.members.add(account)
-
-    def remove_member(self, account):
-        if account in self.members.all():
-            self.members.remove(account)

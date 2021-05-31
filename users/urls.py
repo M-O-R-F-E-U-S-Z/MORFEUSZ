@@ -22,5 +22,6 @@ urlpatterns = [
     path('movies_dont_like/', views.movies_dont_like, name='movies_dont_like'),
     path('movies_like_dont_watch/', views.movies_like_dont_watch, name='movies_like_dont_watch'),
     path('movies_like_watch/', views.movies_like_watch, name='movies_like_watch'),
-    path('movies_watch/', views.movies_watch, name='movies_watch')
+    path('movies_watch/', views.movies_watch, name='movies_watch'),
+    path('upload_images/', views.upload_images, name='upload_images')
 ]

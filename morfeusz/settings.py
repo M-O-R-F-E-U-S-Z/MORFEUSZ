@@ -157,5 +157,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 ALLOWED_HOSTS = ['morfeusz.herokuapp.com', 'localhost', '127.0.0.1']
 
 csp = str(Path(BASE_DIR))
-MEDIA_ROOT = os.path.join(csp + '/media/'.replace('\\', '/'))
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'media'), )
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, '/media/'.replace('\\', '/'))

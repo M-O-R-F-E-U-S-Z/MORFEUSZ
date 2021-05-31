@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .forms import UserRegisterForm, FriendRequestForm
+from .forms import UserRegisterForm, FriendRequestForm, UploadBackgroundForm, UploadProfileForm
 from django.contrib.auth.models import User
 from users.models import FriendRequest, FriendList
 from django.http import HttpResponse
@@ -121,6 +121,8 @@ def profile(request):
         profile = user.user_profile
         background = profile.background_picture
         context['background'] = background
+        profile_pic = profile.profile_picture
+        context['profile_pic'] = profile_pic
     return render(request, 'users/profile.html', context)
 
 
@@ -205,3 +207,19 @@ def unfriend(request, friend_id):
         return HttpResponse('Friend deleted')
     else:
         return HttpResponse("It's not your friend")
+
+
+@login_required
+def upload_images(request):
+    if request.method == "POST":
+        b_form = UploadBackgroundForm(request.POST, request.FILES, instance=request.user.user_profile)
+        p_form = UploadProfileForm(request.POST, request.FILES, instance=request.user.user_profile)
+        if b_form.is_valid() and p_form.is_valid():
+            b_form.save()
+            p_form.save()
+            return redirect('users:profile')
+    else:
+        b_form = UploadBackgroundForm(instance=request.user.user_profile)
+        p_form = UploadProfileForm(instance=request.user.user_profile)
+    context = {'b_form': b_form, "p_form": p_form}
+    return render(request, 'users/upload_images.html', context)

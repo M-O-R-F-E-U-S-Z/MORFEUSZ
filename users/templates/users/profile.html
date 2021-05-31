@@ -2,18 +2,19 @@
 {% load static %}
 {% block content %}
 
-{#    <style>#}
-{#.cover {#}
-{#  background-image: url('{% static background %}');}#}
-{#</style>#}
-{#<div class="cover">#}
+    <style>
+.cover {
+  background-image: url('{% static background %}');}
+</style>
+<div class="cover">
 
-
-
+{#        <img src="{% static background %}" alt="Smiley face" width="250" height="250">#}
 
     <h1>{{ user.username }}</h1>
-<a class="nav-item nav-link" href="{% url 'users:send_friend_request' %}">Send friend request</a><br>
-<a class="btn btn-primary" href="{% url 'users:movie_qualification' %}">Qualify movies</a>
+    <img src="{% static profile_pic %}" alt="Profile pic" height="200"><br>
+    <a class="nav-item nav-link" href="{% url 'users:send_friend_request' %}">Send friend request</a><br>
+    <a class="btn btn-primary" href="{% url 'users:movie_qualification' %}">Qualify movies</a><br>
+    <a class="btn btn-primary" href="{% url 'users:upload_images' %}">Change profile and background picture</a>
 
 
     <h2> Friend request sent to: </h2>
@@ -32,8 +33,8 @@
     {% for friend in friend_list.friends.all %}
     {{ friend }} <a href="/users/unfriend/{{ friend.id }}">Unfriend</a> <br>
     {% endfor %}
-</div>
+
+
+{#    <img src="{% static background %}" alt="My image"/>#}
 {% endblock content %}
 
-
-{#</BODY>#}
