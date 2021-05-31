@@ -2,10 +2,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 import csv
 
+EXTENSION = '.pdf'
+FONT = 30
+XTICK = 20
+YTICK = 20
+
 plt.rcParams.update({
-        'font.size': 30,
-        'xtick.labelsize': 20,
-        'ytick.labelsize': 20 })
+        'font.size': FONT,
+        'xtick.labelsize': XTICK,
+        'ytick.labelsize': YTICK })
 
 def single_plot(name, E, W, L, const=0):
     plt_name = 'Plot-eff_{}'.format(name)
@@ -24,8 +29,7 @@ def single_plot(name, E, W, L, const=0):
     plt.ylim([50, 90])
     plt.text(s='{:.2f}%'.format(np.mean(W[0][-1:])*100), color='b', alpha=1.0, x=E[-1]+1.2, y=np.mean(W[0][-1:])*100+0.6, va='center', ha='left', fontsize=30)
     plt.text(s='{:.2f}%'.format(np.mean(W[1][-1:])*100), color='r', alpha=1.0, x=E[-1]+1.2, y=np.mean(W[1][-1:])*100-0.6, va='center', ha='left', fontsize=30)
-    plt.savefig('Plots/'+plt_name+'.pdf')
-    plt.savefig('Plots/'+plt_name+'.png')
+    plt.savefig('Plots/'+plt_name+EXTENSION)
     plt.close()
     plt_name = 'Plot-loss_{}'.format(name)
     fig = plt.figure(figsize=(14,8))
@@ -124,8 +128,7 @@ def all_plots():
             text = ax.text(i, j, str(round(W[j, i], 2))+' %',
                            ha="center", va="center", color=col)
     
-    plt.savefig(folder+plt_name+'.png')
-    plt.savefig(folder+plt_name+'.pdf')
+    plt.savefig(folder+plt_name+EXTENSION)
     plt.close()
     plt_name = 'Plot-map-loss'
     fig = plt.figure(figsize=(10,10))
@@ -147,5 +150,5 @@ def all_plots():
             text = ax.text(i, j, round(L[j, i], 4),
                            ha="center", va="center", color=col)
     
-    plt.savefig(folder+plt_name+'.pdf')
+    plt.savefig(folder+plt_name+EXTENSION)
     plt.close()
