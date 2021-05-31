@@ -1,5 +1,5 @@
 from django.contrib import admin
-from morfeusz_app.models import Movie
+from morfeusz_app.models import Movie, Group
 # Register your models here.
 
 
@@ -14,3 +14,15 @@ class MovieAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Movie, MovieAdmin)
+
+
+class GroupAdmin(admin.ModelAdmin):
+    list_filter = ['name']
+    list_display = ['name']
+    search_fields = ['name']
+
+    class Meta:
+        model = Group
+
+
+admin.site.register(Group, GroupAdmin)

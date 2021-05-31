@@ -29,23 +29,23 @@ class Movie(models.Model):
         return self.title
 
 
-def generate_unique_code():
-    length = 6
-    while True:
-        new_code = ''.join(random.choises(string.ascii_uppercase, k=length))
-        if Group.objects.filter(code=new_code).exists():
-            break
-    return new_code
+# def generate_unique_code():
+#     length = 6
+#     while True:
+#         new_code = ''.join(random.choise(string.ascii_uppercase, k=length))
+#         if Group.objects.filter(code=new_code).exists():
+#             break
+#     return new_code
 
 
 class Group(models.Model):
 
-    code = models.CharField(max_length=8, default="", unique=True)
+    # code = models.CharField(max_length=8, default="", unique=True)
     name = models.CharField(max_length=30,  default="")
     members = models.ManyToManyField(User, related_name="members")
 
     def __str__(self):
-        return self.members.username
+        return self.name
 
     def add_member(self, account):
         if account not in self.members.all():
@@ -54,3 +54,4 @@ class Group(models.Model):
     def remove_member(self, account):
         if account in self.members.all():
             self.members.remove(account)
+

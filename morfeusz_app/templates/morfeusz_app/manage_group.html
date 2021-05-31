@@ -1,19 +1,14 @@
 {% extends "morfeusz_app/base.html" %}
 {% block content %}
-    <h1>Home Page</h1>
+    <h1>My group</h1>
 
-    <h2>Your groups</h2>
-    {% for group in my_groups %}
-    {{ group.name }} <a href="/group/{{ group.id }}">Manage group</a> <br>
-    {% endfor %}
-
-    <h2>Create group</h2>
+    {{ group_name }}
     <form method="POST">
         {% csrf_token %}
         <fieldset class="form-group">
             {{ form }}
         </fieldset>
+        <button type="submit">Upload</button>
     </form>
-
 
 {% endblock content %}
