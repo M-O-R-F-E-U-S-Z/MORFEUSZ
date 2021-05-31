@@ -6,9 +6,9 @@
     <form method="POST">
         {% csrf_token %}
         <fieldset class="form-group">
-            {{ form }}
+            {{ form.as_p }}
+            <button type="submit">Add member</button>
         </fieldset>
-        <button type="submit">Upload</button>
     </form>
 
 {% endblock content %}

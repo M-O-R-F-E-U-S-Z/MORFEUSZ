@@ -3,6 +3,7 @@ from .models import Group
 from django.shortcuts import render, redirect
 from users.models import FriendList
 from django.contrib.auth.models import User
+from django.http import HttpResponse
 
 
 # def home(request):
@@ -39,16 +40,26 @@ def manage_group(request, group_id):
     context['group_name'] = group.name
     user = request.user
     if request.method == "POST":
-        form = AddGroupMember(request.POST)
-        if form.is_valid():
-            form.save()
-            group.add_member(form.cleaned_data.get("friend"))
-            return redirect('morfeusz_app-home')
+        # form = AddGroupMember(request.POST)
+        # print('sadasdasdsadasdasd')
+        # print(request.POST)
+        # print(request.POST['friend'])
+        member_to_add = User.objects.get(id=request.POST['friend'])
+        group.add_member(member_to_add)
+        return redirect('morfeusz_app-home')
+        # print(request)
+        # print(form.cleaned_data.get("friend"))
+        # if form.is_valid():
+        #     # form.save()
+        #     # group.add_member(form.cleaned_data.get("friend"))
+        #     return redirect('morfeusz_app-home')
+        # else:
+        #     return HttpResponse("form is not valid")
     else:
         friends = FriendList.objects.get(user=user)
         friend_list = []
         for index, my_friend in enumerate(friends.friends.all(), start=1):
-            friend_list.append((index, my_friend))
+            friend_list.append((my_friend, my_friend.username))
         form = AddGroupMember(friend_list)
 
     context['form'] = form
