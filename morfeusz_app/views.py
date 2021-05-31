@@ -3,13 +3,14 @@ from .models import Group
 from django.shortcuts import render, redirect
 from users.models import FriendList
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 
 
 # def home(request):
 #     return render(request, 'morfeusz_app/home.html', {'title': 'Home Page'})
 
-
+@login_required()
 def home(request):
     user = request.user
     context = {}
@@ -34,6 +35,7 @@ def home(request):
     return render(request, 'morfeusz_app/home.html', context)
 
 
+@login_required()
 def manage_group(request, group_id):
     context = {}
     group = Group.objects.get(id=group_id)
@@ -59,6 +61,7 @@ def manage_group(request, group_id):
     return render(request, 'morfeusz_app/manage_group.html', context)
 
 
+@login_required()
 def delete_from_group(request, group_id, member_id):
     group = Group.objects.get(id=group_id)
     member = User.objects.get(id=member_id)
