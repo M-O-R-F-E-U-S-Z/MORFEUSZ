@@ -1,8 +1,13 @@
 {% extends "morfeusz_app/base.html" %}
 {% block content %}
-    <h1>My group</h1>
+    <h1>{{ group.name }}</h1>
 
-    {{ group_name }}
+    <h2>Group members</h2>
+    {% for member in members %}
+    {{ member }} <a href="/delete_from_group/{{ group.id }}/{{ member.id }}">Delete from group</a> <br>
+    {% endfor %}
+
+
     <form method="POST">
         {% csrf_token %}
         <fieldset class="form-group">
