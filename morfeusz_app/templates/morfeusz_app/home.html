@@ -2,18 +2,8 @@
 {% block content %}
     <h1>Home Page</h1>
 
-    <h2>Your groups</h2>
-    {% for group in my_groups %}
-    {{ group.name }} <a href="/group/{{ group.id }}">Manage group</a> <br>
-    {% endfor %}
-
-    <h2>Create group</h2>
-    <form method="POST">
-        {% csrf_token %}
-        <fieldset class="form-group">
-            {{ form }}
-        </fieldset>
-    </form>
-
+    {% if user.is_authenticated %}
+    <a href="/groups/">Go to groups page</a>
+    {% endif %}
 
 {% endblock content %}

@@ -11,6 +11,7 @@
 {#        <img src="{% static background %}" alt="Smiley face" width="250" height="250">#}
 
     <h1>{{ user.username }}</h1>
+
     <img src="{% static profile_pic %}" alt="Profile pic" height="200"><br>
     <a class="nav-item nav-link" href="{% url 'users:send_friend_request' %}">Send friend request</a><br>
     <a class="btn btn-primary" href="{% url 'users:movie_qualification' %}">Qualify movies</a><br>

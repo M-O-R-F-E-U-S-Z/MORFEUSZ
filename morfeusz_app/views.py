@@ -7,11 +7,12 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 
 
-# def home(request):
-#     return render(request, 'morfeusz_app/home.html', {'title': 'Home Page'})
-
-@login_required()
 def home(request):
+    return render(request, 'morfeusz_app/home.html', {'title': 'Home Page'})
+
+
+@login_required
+def groups(request):
     user = request.user
     context = {}
     if request.method == "POST":
@@ -21,7 +22,7 @@ def home(request):
             group = Group.objects.create(name=name)
             group.add_member(user)
             # form.save()
-            return redirect('morfeusz_app-home')
+            return redirect('groups')
     else:
         form = CreateGroupForm()
     context['form'] = form
@@ -32,10 +33,10 @@ def home(request):
         if user in group.members.all():
             my_groups.append(group)
     context['my_groups'] = my_groups
-    return render(request, 'morfeusz_app/home.html', context)
+    return render(request, 'morfeusz_app/groups.html', context)
 
 
-@login_required()
+@login_required
 def manage_group(request, group_id):
     context = {}
     group = Group.objects.get(id=group_id)
