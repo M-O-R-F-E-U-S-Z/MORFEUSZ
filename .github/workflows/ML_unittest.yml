@@ -1,4 +1,4 @@
-name: Automated Unittest
+name: ML Unittest
 
 on: push
 
@@ -19,4 +19,4 @@ jobs:
         pip install sklearn
     - name: Test
       working-directory: ./morfeusz_app/TensorFlow
-      run: python automated_unittest.py
+      run: python ML_unittest.py
