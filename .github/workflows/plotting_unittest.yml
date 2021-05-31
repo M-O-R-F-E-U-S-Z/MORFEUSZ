@@ -1,0 +1,22 @@
+name: plotting Unittest
+
+on: push
+
+jobs:
+  test:
+    name: Run Unittest
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install
+      run: |
+        pip install pandas
+        pip install opencv-python
+        pip install tqdm
+        pip install matplotlib
+        pip install tensorflow
+        pip install sklearn
+    - name: Test
+      working-directory: ./morfeusz_app/TensorFlow
+      run: python plotting_unittest.py
