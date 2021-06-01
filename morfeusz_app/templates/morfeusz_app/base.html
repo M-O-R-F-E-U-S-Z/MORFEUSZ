@@ -81,6 +81,11 @@
               >Profile</a
             >
           </div>
+          <div class="col-md-8">
+            {% if messages %} {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+            {% endfor %} {% endif %} {% block content %}{% endblock %}
+          </div>
           <div id="important-text">
             <p class="text-home">
               If it's not Your account, please <b>logout</b>.
@@ -107,15 +112,8 @@
             {% endif %}
           </div>
         </div>
-
-        <!-- <div class="col-md-8">
-        {% if messages %} {% for message in messages %}
-        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
-        {% endfor %} {% endif %}
-      </div> -->
         <footer class="footer"></footer>
       </div>
-      <!-- {% block content %}{% endblock %} -->
     </div>
   </body>
 </html>
