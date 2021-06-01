@@ -1,0 +1,20 @@
+{% extends "morfeusz_app/base.html" %}
+{% block content %}
+    <h1>Upload background picture</h1>
+<div class="content-section">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ b_form.as_p }}
+        {{ p_form.as_p }}
+        <button type="submit">Upload</button>
+    </form>
+
+    <h1>Upload profile picture</h1>
+
+{#    <form method="POST" enctype="multipart/form-data">#}
+{#        {% csrf_token %}#}
+{#        {{ p_form.as_p }}#}
+{#        <button type="submit">Upload</button>#}
+{#    </form>#}
+</div>
+{% endblock content %}

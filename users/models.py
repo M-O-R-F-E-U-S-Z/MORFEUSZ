@@ -1,9 +1,32 @@
 from django.db import models
-from django.utils import timezone
 from django.contrib.auth.models import User
-from django.conf import settings
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from morfeusz_app.models import Movie
+from django.conf import settings
+
+
+class Profile(models.Model):
+    user_profile = models.OneToOneField(User, on_delete=models.CASCADE, related_name="user_profile")
+    profile_picture = models.ImageField(upload_to='profile_pictures/', default='profile_pictures/default_profile.jpg')
+    background_picture = models.ImageField(upload_to='background_pictures/', default='background_pictures/default_background.jpg')
+    movies_dont_like = models.ManyToManyField(Movie, related_name="linked_profiles_dont_like")
+    movies_like_dont_watch = models.ManyToManyField(Movie, related_name="linked_profiles_like_dont_watch")
+    movies_like_watch = models.ManyToManyField(Movie, related_name="linked_profiles_like_watch")
+    movies_watch = models.ManyToManyField(Movie, related_name="linked_profiles_watch")
+    
+    def all_movies_pk(self):
+        movies_pk = []
+        for mv in self.movies_dont_like.all():
+            movies_pk.append(mv.pk)
+        for mv in self.movies_like_dont_watch.all():
+            movies_pk.append(mv.pk)
+        for mv in self.movies_like_watch.all():
+            movies_pk.append(mv.pk)
+        for mv in self.movies_watch.all():
+            movies_pk.append(mv.pk)
+        return movies_pk
+
 
 
 class FriendList(models.Model):
@@ -68,7 +91,6 @@ class FriendRequest(models.Model):
     def deactivate(self):
         self.is_active = False
         self.save()
-
 
 
 
