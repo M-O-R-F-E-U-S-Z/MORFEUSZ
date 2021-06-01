@@ -63,14 +63,77 @@ class Group(models.Model):
     name = models.CharField(max_length=30,  default="")
     members = models.ManyToManyField(User, related_name="members")
 
+    opinion_wages = {
+        'L': 1,
+        'DL': -1.5,
+        'WTS': 1,
+        'DWTS': -1.5
+    }
+
+    opinion_hash_table = {
+        #[wages score, num of rates]
+        'Action': [0,0],
+        "Comedy": [0,0],
+        "Drama": [0,0],
+        "Horror": [0,0],
+        "Romance": [0,0],  
+    }
+
+
     def __str__(self):
         return self.name
+
 
     def add_member(self, account):
         if account not in self.members.all():
             self.members.add(account)
 
+
     def remove_member(self, account):
         if account in self.members.all():
             self.members.remove(account)
 
+    """ 
+    def movie_matcher(self):
+        for user in self.members:
+            self.update_opinion_ht(user, 'L')
+            self.update_opinion_ht(user, 'DL')
+            self.update_opinion_ht(user, 'WTS')
+            self.update_opinion_ht(user, 'DWTS')
+
+        #changing opinion ht to single values per key
+        for key, value in self.opinion_hash_table.items():
+            self.opinion_hash_table[key] = value[0] / value[1] + 0.5
+
+        wages = {
+            'category': 0.6, #-0.1
+            'score': 0.4, 
+            #'ML': 0.1
+        }
+
+        max_recomendations = 10
+        top_recomendations = []
+
+        for movie in movies:
+
+            category_points = 0
+            for category in movie[0]:
+                category_points += self.opinion_hash_table[category]
+            category_points /= len(movie[0])
+
+            result = category_points*wages['category'] + movie[1]*wages['score']#\
+                    #+ random.random()*wages['ML']
+            
+            top_recomendations.sort
+            if len(top_recomendations) < max_recomendations:
+                top_recomendations.append([result, movie])
+            elif result > top_recomendations[0][0]:
+                top_recomendations[0] = [result, movie]
+
+
+    def update_opinion_ht(self, user, opinion):
+        for movie in user[opinion]:
+            for category in movie[0]:
+                    self.opinion_hash_table[category][0] += self.opinion_wages[opinion]
+                    self.opinion_hash_table[category][1] += 1
+    """
