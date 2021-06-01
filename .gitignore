@@ -3,4 +3,5 @@ env
 *__pycache__
 *.whl
 db.sqlite3
-morfeusz/settings.py
+*.jpg
+*.png

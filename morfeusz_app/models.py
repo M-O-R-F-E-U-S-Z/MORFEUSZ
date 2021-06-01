@@ -1,8 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
 from imdb import IMDb
-import random
-import string
+#import random
+#import string
+import tensorflow as tf
+import cv2
+import numpy as np
+
 
 ia = IMDb()
 
@@ -36,6 +40,21 @@ class Movie(models.Model):
 #         if Group.objects.filter(code=new_code).exists():
 #             break
 #     return new_code
+
+def cnn(img_path):
+    categories = ['Action', 'Comedy', 'Drama', 'Horror', 'Romance']
+    img_size = [128, 128]
+    model_path = 'ML_Models/Model_{}nodes-{}conv-{}dense.hp5'.format(128, 4, 2)
+
+    X = cv2.imread(img_path)
+    X = cv2.resize(X, (img_size[0], img_size[1]))
+    X = np.expand_dims(X, axis=0)
+    
+    model = tf.keras.models.load_model(model_path)
+    pred = model.predict(X)
+    weights = dict(zip(categories, pred[0]))
+
+    return weights
 
 
 class Group(models.Model):
