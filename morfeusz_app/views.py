@@ -68,3 +68,12 @@ def delete_from_group(request, group_id, member_id):
     member = User.objects.get(id=member_id)
     group.remove_member(member)
     return redirect('morfeusz_app-home')
+
+
+#@login_required()
+#def match_movies(request, group_id):
+#    group = Group.objects.get(id=group_id)
+#    recomended_movies = group.movie_matcher()
+#    context['group'] = group
+#    context['movies'] = recomended_movies 
+#    return render(request, 'morfeusz_app/matched_movies.html', context)

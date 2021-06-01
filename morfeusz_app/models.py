@@ -6,7 +6,7 @@ from imdb import IMDb
 import tensorflow as tf
 import cv2
 import numpy as np
-
+from django.conf.global_settings import ML_MODEL
 
 ia = IMDb()
 
@@ -44,14 +44,12 @@ class Movie(models.Model):
 def cnn(img_path):
     categories = ['Action', 'Comedy', 'Drama', 'Horror', 'Romance']
     img_size = [128, 128]
-    model_path = 'ML_Models/Model_{}nodes-{}conv-{}dense.hp5'.format(128, 4, 2)
 
     X = cv2.imread(img_path)
     X = cv2.resize(X, (img_size[0], img_size[1]))
     X = np.expand_dims(X, axis=0)
     
-    model = tf.keras.models.load_model(model_path)
-    pred = model.predict(X)
+    pred = ML_MODEL.predict(X)
     weights = dict(zip(categories, pred[0]))
 
     return weights
@@ -63,21 +61,21 @@ class Group(models.Model):
     name = models.CharField(max_length=30,  default="")
     members = models.ManyToManyField(User, related_name="members")
 
-    opinion_wages = {
-        'L': 1,
-        'DL': -1.5,
-        'WTS': 1,
-        'DWTS': -1.5
-    }
+    #opinion_wages = {
+    #    'L': 1,
+    #    'DL': -1.5,
+    #    'WTS': 1,
+    #    'DWTS': -1.5
+    #}
 
-    opinion_hash_table = {
-        #[wages score, num of rates]
-        'Action': [0,0],
-        "Comedy": [0,0],
-        "Drama": [0,0],
-        "Horror": [0,0],
-        "Romance": [0,0],  
-    }
+    #opinion_hash_table = {
+    #    #[wages score, num of rates]
+    #    'Action': [0,0],
+    #    "Comedy": [0,0],
+    #    "Drama": [0,0],
+    #    "Horror": [0,0],
+    #    "Romance": [0,0],  
+    #}
 
 
     def __str__(self):
@@ -92,8 +90,7 @@ class Group(models.Model):
     def remove_member(self, account):
         if account in self.members.all():
             self.members.remove(account)
-
-    """ 
+"""
     def movie_matcher(self):
         for user in self.members:
             self.update_opinion_ht(user, 'L')
@@ -101,14 +98,10 @@ class Group(models.Model):
             self.update_opinion_ht(user, 'WTS')
             self.update_opinion_ht(user, 'DWTS')
 
-        #changing opinion ht to single values per key
-        for key, value in self.opinion_hash_table.items():
-            self.opinion_hash_table[key] = value[0] / value[1] + 0.5
-
         wages = {
-            'category': 0.6, #-0.1
+            'category': 0.5,
             'score': 0.4, 
-            #'ML': 0.1
+            'ML': 0.1
         }
 
         max_recomendations = 10
@@ -118,11 +111,16 @@ class Group(models.Model):
 
             category_points = 0
             for category in movie[0]:
-                category_points += self.opinion_hash_table[category]
+                category_points += self.opinion_hash_table[category][0] / self.opinion_hash_table[category][1] + 0.5
             category_points /= len(movie[0])
 
+            ML_points = 0
+            for user in users:
+                for pic in [profile_pic, bg_pic]:
+                    ML_points += 0.5 * cnn(pic)
+
             result = category_points*wages['category'] + movie[1]*wages['score']#\
-                    #+ random.random()*wages['ML']
+                    + ML_points*wages['ML']
             
             top_recomendations.sort
             if len(top_recomendations) < max_recomendations:
@@ -136,4 +134,4 @@ class Group(models.Model):
             for category in movie[0]:
                     self.opinion_hash_table[category][0] += self.opinion_wages[opinion]
                     self.opinion_hash_table[category][1] += 1
-    """
+"""

@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+import tensorflow as tf
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -161,3 +162,5 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'media'), )
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+MODEL_PATH = 'C:/Users/rafal/Desktop/project_pite/MORFEUSZ/morfeusz/ML_Models/Model_{}nodes-{}conv-{}dense.hp5'.format(128, 4, 2)
+ML_MODEL = tf.keras.models.load_model(MODEL_PATH)
