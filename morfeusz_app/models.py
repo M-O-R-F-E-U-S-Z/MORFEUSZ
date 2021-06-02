@@ -55,3 +55,4 @@ class Group(models.Model):
         if account in self.members.all():
             self.members.remove(account)
 
+

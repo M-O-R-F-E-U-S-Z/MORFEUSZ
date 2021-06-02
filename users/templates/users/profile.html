@@ -4,14 +4,14 @@
 
     <style>
 .cover {
-  background-image: url('{% static background %}');}
+  {#background-image: url('{% static background %}');}#}
 </style>
 <div class="cover">
 
 {#        <img src="{% static background %}" alt="Smiley face" width="250" height="250">#}
 
     <h1>{{ user.username }}</h1>
-    <img src="{% static profile_pic %}" alt="Profile pic" height="200"><br>
+{#    <img src="{% static profile_pic %}" alt="Profile pic" height="200"><br>#}
     </div>
 
     <a class="nav-item nav-link" href="{% url 'users:send_friend_request' %}">Send friend request</a><br>
