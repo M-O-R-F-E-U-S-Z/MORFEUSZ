@@ -145,23 +145,28 @@ def send_friend_request(request):
             if User.objects.filter(username=receiver_username).exists():
                 receiver = User.objects.get(username=receiver_username)
                 if FriendList.objects.get(user=user).is_mutual_friend(receiver):
-                    return HttpResponse('You are friends with that user')
+                    messages.info(request, f'You are friends with that user')
+                    return redirect('users:profile')
                 elif FriendRequest.objects.filter(sender=receiver, receiver=user):
-                    return HttpResponse('This user send you a friend request, accept it instead of sending a new one!')
+                    messages.info(request, f'This user send you a friend request, accept it instead of sending a new one!')
+                    return redirect('users:profile')
                 else:
                     friend_request, created = FriendRequest.objects.get_or_create(
                         sender=user, receiver=receiver)
                     if created:
-                        return HttpResponse('Friend request sent')
+                        messages.success(request, f'Friend request sent')
+                        return redirect('users:profile')
                     elif friend_request.is_active:
-                        return HttpResponse('Friend request is already sent')
+                        messages.info(request, f'Friend request is already sent')
+                        return redirect('users:profile')
                     else:
-                        # friend_request.is_active = True
                         friend_request.delete()
                         FriendRequest.objects.create(sender=user, receiver=receiver)
-                        return HttpResponse('Friend request sent again')
+                        messages.success(request, f'Friend request sent again')
+                        return redirect('users:profile')
             else:
-                return HttpResponse('There is no such user')
+                messages.info(request, f'There is no such user')
+                return redirect('users:profile')
     else:
         form = FriendRequestForm()
     return render(request, 'users/send_friend_request.html', {'form': form})
