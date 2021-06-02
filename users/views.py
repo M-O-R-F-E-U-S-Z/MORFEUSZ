@@ -177,9 +177,11 @@ def accept_friend_request(request, request_id):
     friend_request = FriendRequest.objects.get(id=request_id)
     if friend_request.receiver == request.user:
         friend_request.accept()
-        return HttpResponse('Friend request accepted')
+        messages.success(request, f'Friend request accepted')
+        return redirect('users:profile')
     else:
-        return HttpResponse("You can't accept request that is not sent to you.")
+        messages.info(request, f"You can't accept request that is not sent to you.")
+        return redirect('users:profile')
 
 
 @login_required
@@ -187,9 +189,11 @@ def decline_friend_request(request, request_id):
     friend_request = FriendRequest.objects.get(id=request_id)
     if friend_request.receiver == request.user:
         friend_request.deactivate()
-        return HttpResponse('Friend request declined')
+        messages.success(request, f'Friend request declined')
+        return redirect('users:profile')
     else:
-        return HttpResponse("You can't decline request that is not sent to you.")
+        messages.info(request, f"You can't decline request that is not sent to you.")
+        return redirect('users:profile')
 
 
 @login_required
@@ -197,9 +201,11 @@ def cancel_friend_request(request, request_id):
     friend_request = FriendRequest.objects.get(id=request_id)
     if friend_request.sender == request.user:
         friend_request.deactivate()
-        return HttpResponse('Friend request canceled')
+        messages.success(request, f'Friend request canceled')
+        return redirect('users:profile')
     else:
-        return HttpResponse("You can't cancel request that is you didn't create.")
+        messages.info(request, f"You can't cancel request that is not sent to you.")
+        return redirect('users:profile')
 
 
 @login_required
@@ -209,9 +215,11 @@ def unfriend(request, friend_id):
     friend_list = FriendList.objects.get(user=user)
     if friend in friend_list.friends.all():
         friend_list.unfriend(friend)
-        return HttpResponse('Friend deleted')
+        messages.success(request, f'Friend deleted')
+        return redirect('users:profile')
     else:
-        return HttpResponse("It's not your friend")
+        messages.info(request, f"It's not your friend")
+        return redirect('users:profile')
 
 
 @login_required
