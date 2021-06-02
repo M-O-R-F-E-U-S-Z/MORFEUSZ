@@ -45,8 +45,6 @@ def manage_group(request, group_id):
 
     members = group.members.all()
     context['members'] = members
-    # print('EEEEEEEEEEEEE MACARENA')
-    # print(request.POST)
     if request.method == "POST":
         member_to_add = User.objects.get(id=request.POST['friend'])
         group.add_member(member_to_add)
