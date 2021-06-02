@@ -147,9 +147,6 @@ def send_friend_request(request):
                 if FriendList.objects.get(user=user).is_mutual_friend(receiver):
                     messages.info(request, f'You are friends with that user')
                     return redirect('users:profile')
-#                 elif FriendRequest.objects.filter(sender=receiver, receiver=user):
-#                     messages.info(request, f'This user send you a friend request, accept it instead of sending a new one!')
-#                     return redirect('users:profile')
                 else:
                     friend_request, created = FriendRequest.objects.get_or_create(
                         sender=user, receiver=receiver)
@@ -177,6 +174,9 @@ def accept_friend_request(request, request_id):
     friend_request = FriendRequest.objects.get(id=request_id)
     if friend_request.receiver == request.user:
         friend_request.accept()
+        if FriendRequest.objects.filter(sender=friend_request.receiver, receiver=friend_request.sender):
+            mutual_request = FriendRequest.objects.get(sender=friend_request.receiver, receiver=friend_request.sender)
+            mutual_request.deactivate()
         messages.success(request, f'Friend request accepted')
         return redirect('users:profile')
     else:
