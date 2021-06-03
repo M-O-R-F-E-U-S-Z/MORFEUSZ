@@ -14,6 +14,7 @@ for new_movie in initial_movies[:4]:
         movie.set_title()
         movie.set_genre()
         movie.set_cover_url()
+        movie.save()
         print(movie)
 
 print(Movie.objects.all())
