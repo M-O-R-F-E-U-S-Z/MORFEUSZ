@@ -21,7 +21,7 @@ class Movie(models.Model):
         self.title = ia.get_movie(self.imdb_id)['title']
 
     def set_genre(self):
-        self.genre = ia.get_movie(self.imdb_id)['genres'][0]
+        self.genre = ia.get_movie(self.imdb_id)['genres']
 
     def set_cover_url(self):
         self.cover_url = ia.get_movie(self.imdb_id)['cover url']
