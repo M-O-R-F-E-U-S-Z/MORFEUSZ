@@ -3,10 +3,12 @@ from django.contrib.auth.models import User
 from imdb import IMDb
 #import random
 #import string
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
 import tensorflow as tf
 import cv2
 import numpy as np
-from django.conf.global_settings import ML_MODEL
+from django.conf import settings
 
 ia = IMDb()
 
@@ -49,7 +51,7 @@ def cnn(img_path):
     X = cv2.resize(X, (img_size[0], img_size[1]))
     X = np.expand_dims(X, axis=0)
     
-    pred = ML_MODEL.predict(X)
+    pred = settings.ML_MODEL.predict(X)
     weights = dict(zip(categories, pred[0]))
 
     return weights
