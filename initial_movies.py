@@ -8,10 +8,9 @@ initial_movies = ia.get_top250_movies()
 print(Movie.objects.all())
 Movie.objects.all().delete()
 
-for new_movie in initial_movies[:4]:
+for new_movie in initial_movies:
    if not Movie.objects.filter(imdb_id=str(new_movie.movieID)).exists():
-        movie = Movie(imdb_id=str(new_movie.movieID))
-        movie.set_title()
+        movie = Movie(imdb_id=str(new_movie.movieID), title=movie['title'])
         movie.set_genre()
         movie.set_cover_url()
         movie.save()
