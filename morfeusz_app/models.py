@@ -12,6 +12,7 @@ class Movie(models.Model):
     title = models.CharField(default='', max_length=255)
     genre = models.CharField(default='', max_length=255)
     cover_url = models.CharField(default='', max_length=255)
+    rating = models.CharField(default='', max_length=255)
 
     class Meta:
         ordering = ['imdb_id']
@@ -24,6 +25,9 @@ class Movie(models.Model):
 
     def set_cover_url(self):
         self.cover_url = ia.get_movie(self.imdb_id)['cover url']
+        
+    def set_rating(self):
+        self.rating = ia.get_movie(self.imdb_id)['rating']
 
     def __str__(self):
         return self.title
