@@ -17,5 +17,3 @@ for new_movie in initial_movies[:4]:
         print(movie)
 
 print(Movie.objects.all())
-        print(movie)
-print(Movie.objects.all())
