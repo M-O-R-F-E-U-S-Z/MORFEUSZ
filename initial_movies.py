@@ -6,7 +6,7 @@ ia = IMDb()
 
 initial_movies = ia.get_top250_movies()
 print(Movie.objects.all())
-Movie.objects.all().delete()
+#Movie.objects.all().delete()
 
 for new_movie in initial_movies:
    if not Movie.objects.filter(imdb_id=str(new_movie.movieID)).exists():
