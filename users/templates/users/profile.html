@@ -8,12 +8,8 @@
 </style>
 <div class="cover">
 
-{#        <img src="{{  }}background %}" alt="Smiley face" width="250" height="250">#}
-
     <h1>{{ user.username }}</h1>
-{#    <img src="{% static profile_pic %}" alt="Profile pic" height="200"><br>#}
-{#{{profile_pic}}#}
-{#    {{ background }}#}
+
     <img src="{{profile_pic}}" alt="Profile pic" height="200">
     </div>
 
@@ -39,7 +35,5 @@
     {{ friend }} <a href="/users/unfriend/{{ friend.id }}">Unfriend</a> <br>
     {% endfor %}
 
-
-{#    <img src="{% static background %}" alt="My image"/>#}
 {% endblock content %}
 
