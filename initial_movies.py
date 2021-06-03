@@ -13,7 +13,8 @@ for new_movie in initial_movies:
         movie = Movie(imdb_id=str(new_movie.movieID), title=new_movie['title'])
         movie.set_genre()
         movie.set_cover_url()
+        movie.set_rating()
         movie.save()
-        print(movie)
+        print(movie, movie.genre, movie.rating)
 
 print(Movie.objects.all())
