@@ -8,7 +8,7 @@ ia = IMDb()
 
 
 class Movie(models.Model):
-    imdb_id = models.CharField(max_length=7, default='0000000')
+    imdb_id = models.CharField(max_length=8, default='0000000')
     title = models.CharField(default='', max_length=255)
     genre = models.CharField(default='', max_length=255)
     cover_url = models.CharField(default='', max_length=255)
