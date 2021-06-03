@@ -137,3 +137,5 @@ class Group(models.Model):
                     self.opinion_hash_table[category][0] += self.opinion_wages[opinion]
                     self.opinion_hash_table[category][1] += 1
 """
+
+

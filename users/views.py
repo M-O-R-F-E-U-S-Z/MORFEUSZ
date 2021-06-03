@@ -145,23 +145,25 @@ def send_friend_request(request):
             if User.objects.filter(username=receiver_username).exists():
                 receiver = User.objects.get(username=receiver_username)
                 if FriendList.objects.get(user=user).is_mutual_friend(receiver):
-                    return HttpResponse('You are friends with that user')
-                elif FriendRequest.objects.filter(sender=receiver, receiver=user):
-                    return HttpResponse('This user send you a friend request, accept it instead of sending a new one!')
+                    messages.info(request, f'You are friends with that user')
+                    return redirect('users:profile')
                 else:
                     friend_request, created = FriendRequest.objects.get_or_create(
                         sender=user, receiver=receiver)
                     if created:
-                        return HttpResponse('Friend request sent')
+                        messages.success(request, f'Friend request sent')
+                        return redirect('users:profile')
                     elif friend_request.is_active:
-                        return HttpResponse('Friend request is already sent')
+                        messages.info(request, f'Friend request is already sent')
+                        return redirect('users:profile')
                     else:
-                        # friend_request.is_active = True
                         friend_request.delete()
                         FriendRequest.objects.create(sender=user, receiver=receiver)
-                        return HttpResponse('Friend request sent again')
+                        messages.success(request, f'Friend request sent again')
+                        return redirect('users:profile')
             else:
-                return HttpResponse('There is no such user')
+                messages.info(request, f'There is no such user')
+                return redirect('users:profile')
     else:
         form = FriendRequestForm()
     return render(request, 'users/send_friend_request.html', {'form': form})
@@ -172,9 +174,14 @@ def accept_friend_request(request, request_id):
     friend_request = FriendRequest.objects.get(id=request_id)
     if friend_request.receiver == request.user:
         friend_request.accept()
-        return HttpResponse('Friend request accepted')
+        if FriendRequest.objects.filter(sender=friend_request.receiver, receiver=friend_request.sender):
+            mutual_request = FriendRequest.objects.get(sender=friend_request.receiver, receiver=friend_request.sender)
+            mutual_request.deactivate()
+        messages.success(request, f'Friend request accepted')
+        return redirect('users:profile')
     else:
-        return HttpResponse("You can't accept request that is not sent to you.")
+        messages.info(request, f"You can't accept request that is not sent to you.")
+        return redirect('users:profile')
 
 
 @login_required
@@ -182,9 +189,11 @@ def decline_friend_request(request, request_id):
     friend_request = FriendRequest.objects.get(id=request_id)
     if friend_request.receiver == request.user:
         friend_request.deactivate()
-        return HttpResponse('Friend request declined')
+        messages.success(request, f'Friend request declined')
+        return redirect('users:profile')
     else:
-        return HttpResponse("You can't decline request that is not sent to you.")
+        messages.info(request, f"You can't decline request that is not sent to you.")
+        return redirect('users:profile')
 
 
 @login_required
@@ -192,9 +201,11 @@ def cancel_friend_request(request, request_id):
     friend_request = FriendRequest.objects.get(id=request_id)
     if friend_request.sender == request.user:
         friend_request.deactivate()
-        return HttpResponse('Friend request canceled')
+        messages.success(request, f'Friend request canceled')
+        return redirect('users:profile')
     else:
-        return HttpResponse("You can't cancel request that is you didn't create.")
+        messages.info(request, f"You can't cancel request that is not sent to you.")
+        return redirect('users:profile')
 
 
 @login_required
@@ -204,9 +215,11 @@ def unfriend(request, friend_id):
     friend_list = FriendList.objects.get(user=user)
     if friend in friend_list.friends.all():
         friend_list.unfriend(friend)
-        return HttpResponse('Friend deleted')
+        messages.success(request, f'Friend deleted')
+        return redirect('users:profile')
     else:
-        return HttpResponse("It's not your friend")
+        messages.info(request, f"It's not your friend")
+        return redirect('users:profile')
 
 
 @login_required

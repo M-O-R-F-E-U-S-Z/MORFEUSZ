@@ -1,29 +1,119 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <title>MORFEUSZ APP</title>
-    </head>
-    <body>
-        <div class="navbar-nav">
-        <a class="nav-item nav-link" href="{% url 'morfeusz_app-home' %}">Home</a>
-        {% if user.is_authenticated %}
-            <a class="nav-item nav-link" href="{% url 'users:profile' %}">Profile</a>
-            <a class="nav-item nav-link" href="{% url 'users:logout' %}">Logout</a>
-        {% else %}
-            <a class="nav-item nav-link" href="{% url 'users:login' %}">Login</a>
-            <a class="nav-item nav-link" href="{% url 'users:register' %}">Register</a>
-        {% endif %}
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Morfeusz</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="image-div-morf">
+        <a href="{% url 'morfeusz_app-home' %}"
+          ><img src="{% static 'images/morf_logo.png' %}" alt="morfeusz_logo"
+        /></a>
+      </div>
+      <div class="wrapper">
+        <div class="side">
+          <h1 id="title">
+            Welcome to <br />
+            Morfeusz!
+          </h1>
+          <p class="text-home" id="lorem">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur
+            quam eaque itaque laboriosam nihil exercitationem, cupiditate esse
+            error possimus aliquid.
+          </p>
+          <div class="socialmedia">
+            <p class="social-p"><b>Follow us:</b></p>
+            <div class="images-container">
+              <a
+                rel="noreferrer"
+                href="https://www.facebook.com/"
+                target="_blank"
+              >
+                <div class="image-div-social">
+                  <img
+                    src="{% static 'images/fb_icon.png' %}"
+                    alt="facebook-logo"
+                  />
+                </div>
+              </a>
+              <a
+                rel="noreferrer"
+                href="https://www.instagram.com/"
+                target="_blank"
+              >
+                <div class="image-div-social">
+                  <img
+                    src="{% static 'images/insta_icon.png' %}"
+                    alt="instagram-logo"
+                  />
+                </div>
+              </a>
+              <a
+                rel="noreferrer"
+                href="https://www.twitter.com/"
+                target="_blank"
+              >
+                <div class="image-div-social">
+                  <img
+                    src="{% static 'images/twitter_icon.png' %}"
+                    alt="twitter-logo"
+                  />
+                </div>
+              </a>
+            </div>
+          </div>
         </div>
-        <div class="col-md-8">
-                {% if messages %}
-                    {% for message in messages %}
-                        <div class="alert alert-{{ message.tags }}">
-                            {{  message }}
-                        </div>
-                    {% endfor %}
-                {% endif %}
+        <div class="side" id="rightside">
+          {% if user.is_authenticated %}
+          <div id="important-text">
+            <p class="text-home">Go to Your <b>Profile</b>.</p>
+            <a class="link" id="btn-link" href="{% url 'users:profile' %}"
+              >Profile</a
+            >
+          </div>
+          <div class="col-md-8">
+            {% if messages %} {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+            {% endfor %} {% endif %} {% block content %}{% endblock %}
+          </div>
+          <div id="important-text">
+            <p class="text-home">
+              If it's not Your account, please <b>logout</b>.
+            </p>
+            <a id="btn-link" href="{% url 'users:logout' %}">Logout</a>
+          </div>
+          {% else %}
+          <div id="important-text">
+            <p class="text-home">
+              If You don't have an account, <b>sign up</b>!
+            </p>
+            <a id="btn-link-red" href="{% url 'users:register' %}"
+              >Create an Acccount</a
+            >
+          </div>
+          <div id="important-text">
+            <p class="text-home">
+              If You already have an account, <b>log in</b>!
+            </p>
+            <a class="link" id="btn-link-blue" href="{% url 'users:login' %}"
+              >Log In</a
+            >
+            <div class="footer"></div>
+            {% endif %}
+          </div>
         </div>
-        {% block content %}{% endblock %}
-    </body>
+        <footer class="footer"></footer>
+      </div>
+    </div>
+  </body>
 </html>
