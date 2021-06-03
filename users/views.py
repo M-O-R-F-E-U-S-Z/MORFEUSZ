@@ -9,6 +9,8 @@ from morfeusz_app.models import Movie
 from .models import Profile
 from django.db.models import Max
 import random
+# from imageupload.settings import MEDIA_ROOT, MEDIA_URL
+# from django.conf import settings
 
 
 def register(request):
@@ -116,12 +118,11 @@ def profile(request):
     context['request_to'] = request_to
     context['request_from'] = request_from
     context['friend_list'] = friend_list
-
     if Profile.objects.filter(user_profile=user).exists():
         profile = user.user_profile
-        background = profile.background_picture
+        background = profile.background_picture.url
         context['background'] = background
-        profile_pic = profile.profile_picture
+        profile_pic = profile.profile_picture.url
         context['profile_pic'] = profile_pic
     return render(request, 'users/profile.html', context)
 

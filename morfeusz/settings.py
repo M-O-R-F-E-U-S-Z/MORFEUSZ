@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+import cloudinary
+import cloudinary_storage
 load_dotenv()
 
 PROJECT_ROOT = os.path.join(os.path.abspath(__file__))
@@ -46,6 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'users',
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
@@ -83,22 +87,22 @@ WSGI_APPLICATION = 'morfeusz.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd9nich36iddmav',
-        'USER': 'zzspaojwzkemdi',
-        'PASSWORD': 'c0101243dd8a2f8e1abb9b745cbb6713b2742d2fc0f5ea08d654e79eb258611b',
-        'HOST': 'ec2-52-50-171-4.eu-west-1.compute.amazonaws.com',
-    }
-}
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'd9nich36iddmav',
+#         'USER': 'zzspaojwzkemdi',
+#         'PASSWORD': 'c0101243dd8a2f8e1abb9b745cbb6713b2742d2fc0f5ea08d654e79eb258611b',
+#         'HOST': 'ec2-52-50-171-4.eu-west-1.compute.amazonaws.com',
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 
 # Password validation
@@ -136,6 +140,14 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
+# Cloudinary stuff
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'szemala',
+    'API_KEY': '143728328661825',
+    'API_SECRET': 'BWqqLx0CueqMHEjKa9L04rrWGp4',
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
