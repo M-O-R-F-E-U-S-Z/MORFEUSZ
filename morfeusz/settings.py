@@ -142,7 +142,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 # Cloudinary stuff
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'szemala',
+    'CLOUD_NAME': 'hjjqrb4ji',
     'API_KEY': str(os.getenv('API_KEY')),
     'API_SECRET': str(os.getenv('API_SECRET')),
 }
