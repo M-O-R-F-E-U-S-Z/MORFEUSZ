@@ -1,5 +1,2 @@
-libsm6,
-libxrender1, 
-libfontconfig1, 
-libice6,
-libGL.so.1
+opencv-python
+
