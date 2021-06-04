@@ -175,5 +175,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 MODEL_PATH = '/app/morfeusz/ML_Models/Model_{}nodes-{}conv-{}dense.hp5'.format(128, 4, 2)
-ML_MODEL = tf.keras.models.load_model(MODEL_PATH)
+#ML_MODEL = tf.keras.models.load_model(MODEL_PATH)
 
