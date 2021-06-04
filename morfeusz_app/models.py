@@ -6,6 +6,9 @@ from imdb import IMDb
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
 import tensorflow as tf
+import cv2
+import numpy as np
+from django.conf import settings
 
 ia = IMDb()
 
