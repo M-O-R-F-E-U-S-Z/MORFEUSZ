@@ -55,7 +55,7 @@ def cnn(img_path):
     X = cv2.resize(X, (img_size[0], img_size[1]))
     X = np.expand_dims(X, axis=0)
     
-    pred = settings.ML_MODEL.predict(X)
+    #pred = settings.ML_MODEL.predict(X)
     weights = dict(zip(categories, pred[0]))
 
     return weights
