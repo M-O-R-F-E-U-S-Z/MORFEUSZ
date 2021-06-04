@@ -13,8 +13,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 from dotenv import load_dotenv
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
-import tensorflow as tf
+#os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
+#import tensorflow as tf
 import cloudinary
 import cloudinary_storage
 load_dotenv()
@@ -174,6 +174,6 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'), )
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-MODEL_PATH = '/app/morfeusz/ML_Models/Model_{}nodes-{}conv-{}dense.hp5'.format(128, 4, 2)
+#MODEL_PATH = '/app/morfeusz/ML_Models/Model_{}nodes-{}conv-{}dense.hp5'.format(128, 4, 2)
 #ML_MODEL = tf.keras.models.load_model(MODEL_PATH)
 
