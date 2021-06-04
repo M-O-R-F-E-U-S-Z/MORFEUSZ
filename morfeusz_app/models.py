@@ -6,7 +6,7 @@ from imdb import IMDb
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
 import tensorflow as tf
-import cv2
+#import cv2
 import numpy as np
 from django.conf import settings
 
@@ -46,7 +46,7 @@ class Movie(models.Model):
 #         if Group.objects.filter(code=new_code).exists():
 #             break
 #     return new_code
-
+'''
 def cnn(img_path):
     categories = ['Action', 'Comedy', 'Drama', 'Horror', 'Romance']
     img_size = [128, 128]
@@ -59,7 +59,7 @@ def cnn(img_path):
     weights = dict(zip(categories, pred[0]))
 
     return weights
-
+'''
 
 class Group(models.Model):
 
