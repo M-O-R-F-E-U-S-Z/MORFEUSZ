@@ -166,7 +166,7 @@ LOGOUT_REDIRECT_URL = ''
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 ALLOWED_HOSTS = ['morfeusz.herokuapp.com', 'localhost', '127.0.0.1']
-
+###
 csp = str(Path(BASE_DIR))
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'), )
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
