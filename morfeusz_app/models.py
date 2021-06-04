@@ -1,8 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
 from imdb import IMDb
-import random
-import string
+#import random
+#import string
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
+import tensorflow as tf
 
 ia = IMDb()
 
