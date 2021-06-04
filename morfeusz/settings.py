@@ -143,8 +143,8 @@ USE_TZ = True
 # Cloudinary stuff
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': 'szemala',
-    'API_KEY': str(os.getenv('API_KEY')),
-    'API_SECRET': str(os.getenv('API_SECRET')),
+    'API_KEY': '143728328661825',
+    'API_SECRET': 'BWqqLx0CueqMHEjKa9L04rrWGp4',
 }
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
