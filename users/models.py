@@ -8,8 +8,8 @@ from django.conf import settings
 
 class Profile(models.Model):
     user_profile = models.OneToOneField(User, on_delete=models.CASCADE, related_name="user_profile")
-    profile_picture = models.ImageField(upload_to='profile_pictures/', default='profile_pictures/default_profile.jpg')
-    background_picture = models.ImageField(upload_to='background_pictures/', default='background_pictures/default_background.jpg')
+    profile_picture = models.ImageField(upload_to='profile_pictures/', default='profile_pictures/default_profile_djcnea')
+    background_picture = models.ImageField(upload_to='background_pictures/', default='background_pictures/default_background_ulhcsp')
     movies_dont_like = models.ManyToManyField(Movie, related_name="linked_profiles_dont_like")
     movies_like_dont_watch = models.ManyToManyField(Movie, related_name="linked_profiles_like_dont_watch")
     movies_like_watch = models.ManyToManyField(Movie, related_name="linked_profiles_like_watch")

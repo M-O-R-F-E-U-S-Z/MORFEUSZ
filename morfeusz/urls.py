@@ -25,7 +25,9 @@ urlpatterns = [
     path('users/', include('users.urls')),
     path('', include('morfeusz_app.urls')),
 
-# ] + staticfiles_urlpatterns()
 ]
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+else:
+    urlpatterns += staticfiles_urlpatterns()

@@ -14,10 +14,11 @@ ia = IMDb()
 
 
 class Movie(models.Model):
-    imdb_id = models.CharField(max_length=7, default='0000000')
+    imdb_id = models.CharField(max_length=8, default='0000000')
     title = models.CharField(default='', max_length=255)
     genre = models.CharField(default='', max_length=255)
     cover_url = models.CharField(default='', max_length=255)
+    rating = models.CharField(default='', max_length=255)
 
     class Meta:
         ordering = ['imdb_id']
@@ -26,10 +27,13 @@ class Movie(models.Model):
         self.title = ia.get_movie(self.imdb_id)['title']
 
     def set_genre(self):
-        self.genre = ia.get_movie(self.imdb_id)['genres'][0]
+        self.genre = ia.get_movie(self.imdb_id)['genres']
 
     def set_cover_url(self):
         self.cover_url = ia.get_movie(self.imdb_id)['cover url']
+        
+    def set_rating(self):
+        self.rating = ia.get_movie(self.imdb_id)['rating']
 
     def __str__(self):
         return self.title
@@ -47,14 +51,14 @@ def cnn(img_path):
     categories = ['Action', 'Comedy', 'Drama', 'Horror', 'Romance']
     img_size = [128, 128]
 
-    X = cv2.imread(img_path)
-    X = cv2.resize(X, (img_size[0], img_size[1]))
-    X = np.expand_dims(X, axis=0)
+    #X = cv2.imread(img_path)
+    #X = cv2.resize(X, (img_size[0], img_size[1]))
+    #X = np.expand_dims(X, axis=0)
     
-    pred = settings.ML_MODEL.predict(X)
-    weights = dict(zip(categories, pred[0]))
+    #pred = settings.ML_MODEL.predict(X)
+    #weights = dict(zip(categories, pred[0]))
 
-    return weights
+    #return weights
 
 
 class Group(models.Model):

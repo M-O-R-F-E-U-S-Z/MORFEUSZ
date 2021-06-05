@@ -15,6 +15,10 @@ import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
 import tensorflow as tf
 from dotenv import load_dotenv
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
+import tensorflow_cpu as tf
+import cloudinary
+import cloudinary_storage
 load_dotenv()
 
 PROJECT_ROOT = os.path.join(os.path.abspath(__file__))
@@ -49,6 +53,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'users',
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
@@ -139,6 +145,14 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
+# Cloudinary stuff
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'hjjqrb4ji',
+    'API_KEY': str(os.getenv('API_KEY')),
+    'API_SECRET': str(os.getenv('API_SECRET')),
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
@@ -157,11 +171,12 @@ LOGOUT_REDIRECT_URL = ''
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 ALLOWED_HOSTS = ['morfeusz.herokuapp.com', 'localhost', '127.0.0.1']
-
+###
 csp = str(Path(BASE_DIR))
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'), )
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-MODEL_PATH = 'C:/Users/rafal/Desktop/project_pite/MORFEUSZ/morfeusz/ML_Models/Model_{}nodes-{}conv-{}dense.hp5'.format(128, 4, 2)
+MODEL_PATH = '/app/morfeusz/ML_Models/Model_{}nodes-{}conv-{}dense.hp5'.format(128, 4, 2)
 ML_MODEL = tf.keras.models.load_model(MODEL_PATH)
+

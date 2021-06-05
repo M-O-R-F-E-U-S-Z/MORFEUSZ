@@ -3,8 +3,8 @@
     <h1>Scoring</h1>
     <p>{{ movie.title }}</p>
     <img src="{{ movie.cover_url }}">
-    <a class="btn btn-primary" href="{% url 'users:movies_dont_like' %}">Dont like</a>
-    <a class="btn btn-primary" href="{% url 'users:movies_like_dont_watch' %}">Like dont watch</a>
-    <a class="btn btn-primary" href="{% url 'users:movies_like_watch' %}">Like watch</a>
-    <a class="btn btn-primary" href="{% url 'users:movies_watch' %}">Watch</a>
+    <a class="btn btn-primary" href="{% url 'users:movies_like_watch' %}">Like it!</a>
+    <a class="btn btn-primary" href="{% url 'users:movies_dont_like' %}">Don't like it!</a>
+    <a class="btn btn-primary" href="{% url 'users:movies_like_dont_watch' %}">Want to watch it!</a>
+    <a class="btn btn-primary" href="{% url 'users:movies_watch' %}">Don't want to watch it!</a>
 {% endblock content %}
