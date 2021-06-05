@@ -174,6 +174,6 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'), )
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-MODEL_PATH = '/media/ML_MODEL/Model_{}nodes-{}conv-{}dense.hp5'.format(128, 4, 2)
+MODEL_PATH = 'DEFAULT_FILE_STORAGE/ML_MODEL/Model_{}nodes-{}conv-{}dense.hp5'.format(128, 4, 2)
 ML_MODEL = tf.keras.models.load_model(MODEL_PATH)
 
