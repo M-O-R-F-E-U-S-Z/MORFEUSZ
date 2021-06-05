@@ -16,7 +16,7 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 import tensorflow as tf
 from dotenv import load_dotenv
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
-import tensorflow_cpu as tf
+import tensorflow as tf
 import cloudinary
 import cloudinary_storage
 load_dotenv()
