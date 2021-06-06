@@ -51,14 +51,14 @@ def cnn(img_path):
     categories = ['Action', 'Comedy', 'Drama', 'Horror', 'Romance']
     img_size = [128, 128]
 
-    #X = cv2.imread(img_path)
-    #X = cv2.resize(X, (img_size[0], img_size[1]))
-    #X = np.expand_dims(X, axis=0)
+    X = cv2.imread(img_path)
+    X = cv2.resize(X, (img_size[0], img_size[1]))
+    X = np.expand_dims(X, axis=0)
     
-    #pred = settings.ML_MODEL.predict(X)
-    #weights = dict(zip(categories, pred[0]))
+    pred = settings.ML_MODEL.predict(X)
+    weights = dict(zip(categories, pred[0]))
 
-    #return weights
+    return weights
 
 
 class Group(models.Model):
