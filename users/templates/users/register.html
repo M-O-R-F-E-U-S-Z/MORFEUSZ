@@ -1,23 +1,108 @@
-{% block content %}
-    <h1>Register</h1>
-<div class="content-section">
-    <form method="POST">
-        {% csrf_token %}
-        <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Join Today</legend>
-            {{ form }}
-        <fieldset>
-        <div class="form-group">
-            <button class="btn btn-outline-info" type="submit">Sign Up</button>
+{% block content %} {% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Morfeusz</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'css/register.css' %}" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="image-div-morf">
+        <a href="{% url 'morfeusz_app-home' %}"
+          ><img src="{% static 'images/morf_logo.png' %}" alt="morfeusz_logo"
+        /></a>
+      </div>
+      <div class="wrapper">
+        <div class="side">
+          <h1 id="title">
+            Welcome to <br />
+            Morfeusz!
+          </h1>
+          <p class="text-home" id="lorem">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur
+            quam eaque itaque laboriosam nihil exercitationem, cupiditate esse
+            error possimus aliquid.
+          </p>
+          <div class="socialmedia">
+            <p class="social-p"><b>Follow us:</b></p>
+            <div class="images-container">
+              <a
+                rel="noreferrer"
+                href="https://www.facebook.com/"
+                target="_blank"
+              >
+                <div class="image-div-social">
+                  <img
+                    src="{% static 'images/fb_icon.png' %}"
+                    alt="facebook-logo"
+                  />
+                </div>
+              </a>
+              <a
+                rel="noreferrer"
+                href="https://www.instagram.com/"
+                target="_blank"
+              >
+                <div class="image-div-social">
+                  <img
+                    src="{% static 'images/insta_icon.png' %}"
+                    alt="instagram-logo"
+                  />
+                </div>
+              </a>
+              <a
+                rel="noreferrer"
+                href="https://www.twitter.com/"
+                target="_blank"
+              >
+                <div class="image-div-social">
+                  <img
+                    src="{% static 'images/twitter_icon.png' %}"
+                    alt="twitter-logo"
+                  />
+                </div>
+              </a>
+            </div>
+          </div>
         </div>
-        </fieldset>
-        </fieldset>
-    </form>
-    <div class="border-top pt-3">
-        <small class="text-muted">
-            Already Have An Account? <a class="ml-2" href="{% url 'users:login' %}">Sign In</a>
-        </small>
-    </div>
+        <div class="side" id="rightside">
+          <div class="header-for-side">
+            <h1>Register</h1>
+            <div class="tooltip">
+              <div class="image-div-question">
+                <img
+                  src="{% static 'images/questionmark.png' %}"
+                  alt="question-mark"
+                />
+              </div>
+              <span class="tooltiptext"
+                >Password must contain at least 8 characters.</span
+              >
+            </div>
+          </div>
+          <form method="POST" class="form-cls">
+            {% csrf_token %} {{ form }}
+            <div class="btn-div">
+              <button class="signup-btn" type="submit">Sign Up</button>
+            </div>
+          </form>
+          <div class="">
+            Already Have An Account?
+            <a class="" href="{% url 'users:login' %}">Sign In</a>
+          </div>
+          <div class="footer"></div>
+        </div>
 
-</div>
-{% endblock content %}
+        <footer class="footer"></footer>
+      </div>
+    </div>
+  </body>
+  {% endblock content %}
+</html>
