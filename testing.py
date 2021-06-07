@@ -1,30 +1,30 @@
-from django.contrib.auth.models import User
-from morfeusz_app.models import Movie
-from users.models import Profile
-from imdb import IMDb
-
-ia = IMDb()
-
-print(Movie.objects.all())
-print(Movie.objects.all().count())
+# from django.contrib.auth.models import User
+# from morfeusz_app.models import Movie
+# from users.models import Profile
+# from imdb import IMDb
+#
+# ia = IMDb()
+#
+# print(Movie.objects.all())
+# print(Movie.objects.all().count())
+# # print(User.objects.all())
+#
+# # user = User.objects.all().first()
+# # profile = Profile(user_profile=user)
+# # profile.save()
 # print(User.objects.all())
-
-# user = User.objects.all().first()
-# profile = Profile(user_profile=user)
-# profile.save()
-print(User.objects.all())
-user = User.objects.filter(username='test_user_1').first()
-profile = user.user_profile
-# profile.movies_like_watch.all().delete()
-# profile.movies_dont_like.clear()
-# profile.movies_like_dont_watch.clear()
-# profile.movies_like_watch.clear()
-# profile.movies_watch.clear()
-print(profile.movies_dont_like.all())
-print(profile.movies_like_dont_watch.all())
-print(profile.movies_like_watch.all())
-print(profile.movies_watch.all())
-print(profile.all_movies_pk())
+# user = User.objects.filter(username='test_user_1').first()
+# profile = user.user_profile
+# # profile.movies_like_watch.all().delete()
+# # profile.movies_dont_like.clear()
+# # profile.movies_like_dont_watch.clear()
+# # profile.movies_like_watch.clear()
+# # profile.movies_watch.clear()
+# print(profile.movies_dont_like.all())
+# print(profile.movies_like_dont_watch.all())
+# print(profile.movies_like_watch.all())
+# print(profile.movies_watch.all())
+# print(profile.all_movies_pk())
 # print(Movie.objects.all().filter(title='Pulp Fiction').first().pk)
 # print(Movie.objects.filter(pk=23))
 

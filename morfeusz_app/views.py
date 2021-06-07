@@ -48,7 +48,7 @@ def manage_group(request, group_id):
     if request.method == "POST":
         member_to_add = User.objects.get(id=request.POST['friend'])
         group.add_member(member_to_add)
-        return redirect('morfeusz_app-home')
+        return redirect('morfeusz_app/manage_group.html')
     else:
         friends = FriendList.objects.get(user=user)
         friend_list = []
