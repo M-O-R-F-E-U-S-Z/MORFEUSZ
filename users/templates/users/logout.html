@@ -1,8 +1,78 @@
-{% block content %}
-    <h2>You have been logged out</h2>
-    <div class="border-top pt-3">
-        <small class="text-muted">
-            <a href="{% url 'users:login' %}">Log In Again</a>
-        </small>
+{% block content %} {% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Morfeusz</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'css/logout.css' %}" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="image-div-morf">
+        <a href="{% url 'morfeusz_app-home' %}"
+          ><img src="{% static 'images/morf_logo.png' %}" alt="morfeusz_logo"
+        /></a>
+      </div>
+      <div>
+        <div class="">
+          <h1 id="title">Thank You for using Morfeusz!</h1>
+          <div class="normal-text">
+            <p>Back to the</p>
+            <a id="login-link" href="{% url 'users:login' %}"> Login </a>
+            <p>page.</p>
+          </div>
+          <div class="socialmedia">
+            <p class="social-p"><b>Follow us:</b></p>
+            <div class="images-container">
+              <a
+                rel="noreferrer"
+                href="https://www.facebook.com/"
+                target="_blank"
+              >
+                <div class="image-div-social">
+                  <img
+                    src="{% static 'images/fb_icon.png' %}"
+                    alt="facebook-logo"
+                  />
+                </div>
+              </a>
+              <a
+                rel="noreferrer"
+                href="https://www.instagram.com/"
+                target="_blank"
+              >
+                <div class="image-div-social">
+                  <img
+                    src="{% static 'images/insta_icon.png' %}"
+                    alt="instagram-logo"
+                  />
+                </div>
+              </a>
+              <a
+                rel="noreferrer"
+                href="https://www.twitter.com/"
+                target="_blank"
+              >
+                <div class="image-div-social">
+                  <img
+                    src="{% static 'images/twitter_icon.png' %}"
+                    alt="twitter-logo"
+                  />
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <footer class="footer"></footer>
+      </div>
     </div>
-{% endblock content %}
+  </body>
+  {% endblock content %}
+</html>
