@@ -15,6 +15,6 @@ for new_movie in initial_movies:
         movie.set_cover_url()
         movie.set_rating()
         movie.save()
-        print(movie, movie.genre, type(movie.genre), movie.get_genre(), movie.rating)
+        print(movie, movie.get_genre(), movie.rating)
 
 print(Movie.objects.all())
