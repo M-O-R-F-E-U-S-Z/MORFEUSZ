@@ -16,4 +16,4 @@ jobs:
       run: |
         pip install django
     - name: Test
-      run: python tests.py
+      run: python ./morfeusz_app/tests.py
