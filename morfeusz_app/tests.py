@@ -1,5 +1,5 @@
-import django
-django.setup()
+import os
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'morfeusz.settings')
 from django.test import TestCase
 from models import Group
 from django.contrib.auth.models import User
