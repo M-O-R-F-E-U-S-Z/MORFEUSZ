@@ -16,6 +16,7 @@ jobs:
       run: |
         pip install django
         pip install python-dotenv
+        pip install tensorflow
     - name: Test
       working-directory: ./morfeusz_app
       run: python tests.py
