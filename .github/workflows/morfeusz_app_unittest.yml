@@ -17,6 +17,7 @@ jobs:
         pip install django
         pip install python-dotenv
         pip install tensorflow
+        pip install cloudinary
     - name: Test
       working-directory: ./morfeusz_app
       run: python tests.py
