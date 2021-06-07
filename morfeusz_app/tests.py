@@ -1,3 +1,5 @@
+import django
+django.setup()
 from django.test import TestCase
 from models import Group
 from django.contrib.auth.models import User
