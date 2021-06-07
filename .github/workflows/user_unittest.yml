@@ -1,4 +1,4 @@
-name: User Test
+name: User Unittest
 
 on: push
 
