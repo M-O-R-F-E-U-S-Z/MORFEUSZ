@@ -111,7 +111,7 @@ class Group(models.Model):
         for member in self.members.all():
             user = Profile.objects.get(user_profile=member)
             users.append(user)
-            users_ML.append(cnn(user.profile_picture))
+            #users_ML.append(cnn(user.profile_picture))
             users_opinion.append(  {'L': list(user.movies_like_watch.all()),
                                     'DL': list(user.movies_dont_like.all()),
                                     'WTW': list(user.movies_like_dont_watch.all()),
@@ -144,14 +144,14 @@ class Group(models.Model):
                 if genre in genres:
                     genre_points += genres[genre][2] + 0.5
                 genre_points /= len(movie.get_genre())
-                
+            '''    
             ML_points = 0
             for genre in movie.get_genre():
                 if genre in ['Action', 'Comedy', 'Drama', 'Horror', 'Romance']:
                     for i in range(len(users_ML)):
                         ML_points += users_ML[i][genre]
             ML_points /= len(self.members.all())
-                
+            '''    
             result = genre_points*self.FINAL_WAGES['genre'] + (float(movie.rating)/10)*self.FINAL_WAGES['rating']#\
                     #+ ML_points*self.FINAL_WAGES['ML']
             
