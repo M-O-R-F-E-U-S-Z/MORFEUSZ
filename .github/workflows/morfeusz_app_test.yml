@@ -1,0 +1,17 @@
+name: Morfeusz_app Test
+
+on: push
+
+jobs:
+  test:
+    name: Run Unittest
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install
+      run: |
+        
+    - name: Test
+      working-directory: ./morfeusz_app
+      run: python tests.py
