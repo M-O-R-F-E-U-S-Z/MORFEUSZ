@@ -1,10 +1,10 @@
 import os
 import sys
-import django
+from django.conf import settings
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(BASE_DIR)
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'morfeusz.settings')
-django.setup()
+settings.configure()
 from django.test import TestCase
 from models import Group
 from django.contrib.auth.models import User
