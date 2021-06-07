@@ -68,10 +68,14 @@ def delete_from_group(request, group_id, member_id):
     return redirect('morfeusz_app-home')
 
 
-#@login_required()
-#def match_movies(request, group_id):
-#    group = Group.objects.get(id=group_id)
-#    recomended_movies = group.movie_matcher()
-#    context['group'] = group
-#    context['movies'] = recomended_movies 
-#    return render(request, 'morfeusz_app/matched_movies.html', context)
+@login_required()
+def recomended_movies(request, group_id):
+    group = Group.objects.get(id=group_id)
+    match = group.movie_matcher()
+    max_recomendations = group.MAX_RECOMENDATIONS
+    context = {'results': [], 'titles': [], 'movies': []}
+    for i in range(max_recomendations):
+        context['results'].append(match[i][0])
+        context['titles'].append(match[i][1])
+        context['movies'].append(match[i][2])                                               
+    return render(request, 'morfeusz_app/recomended_movies.html', context)

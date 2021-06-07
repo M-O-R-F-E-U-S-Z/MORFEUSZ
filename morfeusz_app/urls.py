@@ -7,6 +7,6 @@ urlpatterns = [
     path('group/<int:group_id>/', views.manage_group, name='group'),
     path('delete_from_group/<int:group_id>/<int:member_id>/',
          views.delete_from_group, name='delete_from_group'),
-    #path('matched_movies/<int:group_id>', views.match_movies, name='matched_movies')
+    path('recomended_movies/<int:group_id>', views.recomended_movies, name='matched_movies')
 ]
 

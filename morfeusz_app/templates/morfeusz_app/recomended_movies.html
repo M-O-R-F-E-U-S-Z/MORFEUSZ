@@ -1,0 +1,9 @@
+{% extends "morfeusz_app/base.html" %}
+{% block content %}
+<h1>TOP RECOMENDATIONS:</h1> <br>
+
+{% for movie in movies %}
+<p>{{ movie }}</p>
+<img src="{{ movie.cover_url }}">
+{% endfor %}
+{% endblock content %}

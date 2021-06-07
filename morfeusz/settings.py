@@ -34,7 +34,6 @@ SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
-
 ALLOWED_HOSTS = []
 
 
@@ -89,7 +88,7 @@ WSGI_APPLICATION = 'morfeusz.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -99,13 +98,13 @@ DATABASES = {
         'HOST': 'ec2-52-50-171-4.eu-west-1.compute.amazonaws.com',
     }
 }
-
-#DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#    }
-#}
+'''
+DATABASES = {
+     'default': {
+         'ENGINE': 'django.db.backends.sqlite3',
+         'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 
 # Password validation
@@ -146,8 +145,8 @@ USE_TZ = True
 # Cloudinary stuff
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': 'hjjqrb4ji',
-    'API_KEY': str(os.getenv('API_KEY')),
-    'API_SECRET': str(os.getenv('API_SECRET')),
+    'API_KEY': '361738764871612',
+    'API_SECRET': 'qNo48Lwt6_mOfrniAqhSL1qi-vE',
 }
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
