@@ -4,8 +4,6 @@ from django.contrib.auth.models import User
 
 # Create your tests here.
 
-export DJANGO_SETTINGS_MODULE = morfeusz.settings
-
 class GroupTest(TestCase):
 
     def setUp(self):
