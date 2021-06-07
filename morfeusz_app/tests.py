@@ -1,4 +1,5 @@
 from django.test import TestCase
+django.setup()
 from models import Group
 from django.contrib.auth.models import User
 
