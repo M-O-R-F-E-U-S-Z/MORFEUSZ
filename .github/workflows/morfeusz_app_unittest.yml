@@ -20,5 +20,5 @@ jobs:
         pip install cloudinary
         pip install django-cloudinary-storage
     - name: Test
-      working-directory: ./
-      run: python manage.py test
+      working-directory: ./morfeusz_app
+      run: python tests.py test
