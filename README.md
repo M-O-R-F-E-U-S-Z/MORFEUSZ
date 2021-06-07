@@ -16,7 +16,7 @@ Tinder for movies. App for deciding what movies to watch with Your friends, base
 
 Technology stack:
 - Back-end: Django, PostgreSQL, Heroku
-- Front-end: ReactJS, TailwindCSS
+- Django Templates
 
 Features:
 
