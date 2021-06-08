@@ -28,4 +28,4 @@ jobs:
         pip install -r .github/workflows/requirements.txt
         
     - name: Test
-      run: python manage.py test --keepdb
+      run: python manage.py test
