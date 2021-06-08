@@ -20,5 +20,6 @@ jobs:
         pip install cloudinary
         pip install django-cloudinary-storage
         pip install psycopg2
+        pip install imdb
     - name: Test
       run: python manage.py test
