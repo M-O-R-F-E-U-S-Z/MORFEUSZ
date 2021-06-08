@@ -27,7 +27,5 @@ jobs:
       run: |
         pip install -r .github/workflows/requirements.txt
         
-    - name: Run migrations
-      run: python manage.py migrate
     - name: Test
       run: python manage.py test
