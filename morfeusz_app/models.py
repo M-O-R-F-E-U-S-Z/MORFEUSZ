@@ -140,16 +140,16 @@ class Group(models.Model):
                 if genre in genres:
                     genre_points += genres[genre][2] + 0.5
                 genre_points /= len(movie.get_genre())
-            '''    
+                
             ML_points = 0
             for genre in movie.get_genre():
                 if genre in ['Action', 'Comedy', 'Drama', 'Horror', 'Romance']:
                     for i in range(len(users_ML)):
                         ML_points += users_ML[i][genre]
-            ML_points /= len(self.members.all())
-            '''    
-            result = genre_points*self.FINAL_WAGES['genre'] + (float(movie.rating)/10)*self.FINAL_WAGES['rating']#\
-                    #+ ML_points*self.FINAL_WAGES['ML']
+            ML_points /= len(users)
+                
+            result = genre_points*self.FINAL_WAGES['genre'] + (float(movie.rating)/10)*self.FINAL_WAGES['rating']\
+                    + ML_points*self.FINAL_WAGES['ML']
             
             if len(top_recomendations) < self.MAX_RECOMENDATIONS:
                 top_recomendations.append([result, movie.title, movie.cover_url])
