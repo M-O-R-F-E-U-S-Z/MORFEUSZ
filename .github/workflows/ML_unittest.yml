@@ -14,9 +14,9 @@ jobs:
         python-version: 3.9
     - name: Install
       run: |
-        pip install numpy==1.20.0
+        pip install numpy>=1.20.0
         pip install pandas
-        pip install opencv-python==4.5.2.52
+        pip install opencv-python
     - name: Test
       working-directory: ./morfeusz_app/TensorFlow
       run: python ML_unittest.py
