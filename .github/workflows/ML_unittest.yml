@@ -12,6 +12,7 @@ jobs:
     - name: Install
       run: |
         pip install numpy==1.19.5
+        pip install pandas==1.2.4
     - name: Test
       working-directory: ./morfeusz_app/TensorFlow
       run: python ML_unittest.py
