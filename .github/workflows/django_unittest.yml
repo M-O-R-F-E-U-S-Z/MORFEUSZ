@@ -1,4 +1,4 @@
-name: Morfeusz_app Unittest
+name: Django Unittest
 
 on: push
 
