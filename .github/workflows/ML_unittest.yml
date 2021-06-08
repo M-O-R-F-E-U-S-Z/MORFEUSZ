@@ -15,7 +15,7 @@ jobs:
     - name: Install
       run: |
         pip install numpy==1.20.0
-        pip install pandas==1.2.4
+        pip install pandas
         pip install opencv-python==4.5.2.52
     - name: Test
       working-directory: ./morfeusz_app/TensorFlow
