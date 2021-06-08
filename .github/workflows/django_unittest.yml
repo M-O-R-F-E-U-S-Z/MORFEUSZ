@@ -29,12 +29,7 @@ jobs:
         python-version: 3.9
     - name: Install
       run: |
-        pip3 install django
-        pip3 install python-dotenv
-        pip3 install tensorflow
-        pip3 install cloudinary
-        pip3 install django-cloudinary-storage
-        pip3 install psycopg2
-        pip3 install imdb
+        python -m pip install --upgrade pip
+        pip install -r .github/workflows/requirements.txt
     - name: Test
       run: python manage.py test
