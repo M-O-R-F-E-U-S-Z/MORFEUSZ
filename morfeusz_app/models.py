@@ -129,17 +129,18 @@ class Group(models.Model):
                         else:
                                 genres[genre] = [self.OPINION_WAGES[key], 1, self.INIT_GENRE_RATING]
             for genre in genres:
-                score = genres[genre][0] / genres[genre][1]
                 if genres[genre][1] > 0:
-                    if score <= 1 and score > 0:
-                        genres[genre][2] += score
-                    elif score > 1:
-                        genres[genre][2] = 1
-                    else:
-                        genres[genre][2] = 0
+                    genres[genre][2] += genres[genre][0] / genres[genre][1]
                 genres[genre][0] = 0
                 genres[genre][1] = 0
-
+        
+        for genre in genres:
+            genres[genre][2] /= len(users}
+            if genres[genre][2] > 1:
+                genres[genre][2] = 1
+            elif genres[genre][2] < 0:
+                genres[genre][2] = 0
+        
         top_recomendations = []
 
         for movie in Movie.objects.all():
