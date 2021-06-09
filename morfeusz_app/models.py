@@ -128,7 +128,7 @@ class Group(models.Model):
                                 genres[genre][1] += 1
                         else:
                                 genres[genre] = [self.OPINION_WAGES[key], 1, self.INIT_GENRE_RATING]
-            for genre in genres.items():
+            for genre in genres:
                 if genres[genre][1] > 0:
                     genres[genre][2] += genres[genre][0] / genres[genre][1]
                     genres[genre][0] = 0
@@ -144,7 +144,8 @@ class Group(models.Model):
                     genre_points += genres[genre][2]
                 else:
                     genre_points += self.INIT_GENRE_RATING
-                genre_points /= len(movie.get_genre())
+                if genre_points:
+                    genre_points /= len(movie.get_genre())
                 
             ML_ht = {'Action': 0, 'Comedy': 0, 'Drama': 0, 'Horror': 0, 'Romance': 0}
             ML_points = 0
@@ -155,7 +156,8 @@ class Group(models.Model):
                     for i in range(len(users_ML)):
                         ML_ht[genre] += users_ML[i][genre]
                     ML_points += ML_ht[genre] / len(users)
-            ML_points /= genres_in_ML
+            if ML_points:
+                ML_points /= genres_in_ML
                 
             result = genre_points*self.FINAL_WAGES['genre'] + (float(movie.rating)/10)*self.FINAL_WAGES['rating']\
                     + ML_points*self.FINAL_WAGES['ML']
