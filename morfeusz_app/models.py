@@ -135,7 +135,7 @@ class Group(models.Model):
                 genres[genre][1] = 0
         
         for genre in genres:
-            genres[genre][2] /= len(users}
+            genres[genre][2] /= len(users)
             if genres[genre][2] > 1:
                 genres[genre][2] = 1
             elif genres[genre][2] < 0:
