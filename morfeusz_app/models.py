@@ -117,7 +117,7 @@ class Group(models.Model):
 
         genres = {'Action': [0,0,self.INIT_GENRE_RATING], 'Comedy': [0,0,self.INIT_GENRE_RATING],
                   'Drama': [0,0,self.INIT_GENRE_RATING], 'Horror': [0,0,self.INIT_GENRE_RATING],
-                  'Romance': [0,0,self.INIT_GENRE_RATING]}
+                  'Romance': [0,0,self.INIT_GENRE_RATING]} #{'GENRE': [sum of wages score(A), num of ratings(B), A/B] 
         
         for user in users_opinion:
             for key, value in user.items():
