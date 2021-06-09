@@ -96,6 +96,9 @@ DATABASES = {
         'USER': 'zzspaojwzkemdi',
         'PASSWORD': 'c0101243dd8a2f8e1abb9b745cbb6713b2742d2fc0f5ea08d654e79eb258611b',
         'HOST': 'ec2-52-50-171-4.eu-west-1.compute.amazonaws.com',
+        'TEST': {
+            'ENGINE': 'django.db.backends.sqlite3',
+        }
     }
 }
 
