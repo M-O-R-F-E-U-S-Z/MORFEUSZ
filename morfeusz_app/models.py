@@ -144,8 +144,7 @@ class Group(models.Model):
                     genre_points += genres[genre][2]
                 else:
                     genre_points += self.INIT_GENRE_RATING
-                if genre_points:
-                    genre_points /= len(movie.get_genre())
+            genre_points /= len(movie.get_genre())
                 
             ML_ht = {'Action': 0, 'Comedy': 0, 'Drama': 0, 'Horror': 0, 'Romance': 0}
             ML_points = 0
