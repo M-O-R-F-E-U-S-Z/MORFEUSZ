@@ -72,7 +72,8 @@ from users.models import Profile
 ################################
 
 class Group(models.Model):
-
+    
+    INIT_GENRE_RATING = 0.5
     OPINION_WAGES = {
             'L': 1,
             'DL': -1,
@@ -114,7 +115,9 @@ class Group(models.Model):
                                     'DWTW': list(user.movies_watch.all())} )
 
 
-        genres = {'Action': [0,0,0], 'Comedy': [0,0,0], 'Drama': [0,0,0], 'Horror': [0,0,0], 'Romance': [0,0,0]}
+        genres = {'Action': [0,0,INIT_GENRE_RATING], 'Comedy': [0,0,INIT_GENRE_RATING],
+                  'Drama': [0,0,INIT_GENRE_RATING], 'Horror': [0,0,INIT_GENRE_RATING],
+                  'Romance': [0,0,INIT_GENRE_RATING]}
         
         for user in users_opinion:
             for key, value in user.items():
@@ -124,12 +127,12 @@ class Group(models.Model):
                                 genres[genre][0] += self.OPINION_WAGES[key]
                                 genres[genre][1] += 1
                         else:
-                                genres[genre] = [self.OPINION_WAGES[key], 1, 0]
-            for key,value in genres.items():
-                if value[1] > 0:
-                    value[2] += value[0]/value[1]
-                    value[0] = 0
-                    value[1] = 0
+                                genres[genre] = [self.OPINION_WAGES[key], 1, INIT_GENRE_RATING]
+            for genre in genres.items():
+                if genres[genre][1] > 0:
+                    genres[genre][2] += genres[genre][0] / genres[genre][1]
+                    genres[genre][0] = 0
+                    genres[genre][1] = 0
 
         top_recomendations = []
 
@@ -138,15 +141,21 @@ class Group(models.Model):
             genre_points = 0
             for genre in movie.get_genre():
                 if genre in genres:
-                    genre_points += genres[genre][2] + 0.5
+                    genre_points += genres[genre][2]
+                else:
+                    genre_points += INIT_GENRE_RATING
                 genre_points /= len(movie.get_genre())
                 
+            ML_ht = {'Action': 0, 'Comedy': 0, 'Drama': 0, 'Horror': 0, 'Romance': 0}
             ML_points = 0
+            genres_in_ML = 0
             for genre in movie.get_genre():
-                if genre in ['Action', 'Comedy', 'Drama', 'Horror', 'Romance']:
+                if genre in ML_ht:
+                    genres_in_ML += 1
                     for i in range(len(users_ML)):
-                        ML_points += users_ML[i][genre]
-            ML_points /= len(users)
+                        ML_ht[genre] += users_ML[i][genre]
+                    ML_points += ML_ht[genre] / len(users)
+            ML_points /= genres_in_ML
                 
             result = genre_points*self.FINAL_WAGES['genre'] + (float(movie.rating)/10)*self.FINAL_WAGES['rating']\
                     + ML_points*self.FINAL_WAGES['ML']
