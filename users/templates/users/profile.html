@@ -50,15 +50,11 @@
       {% endfor %}
     </div>
   </div>
+
   <p>Background Picture:</p>
-  {#<img
-    src="{% static background %}"
-    alt="Smiley face"
-    width="250"
-    height="250"
-  />}
+  <img src="{{background}}" alt="Smiley face" width="250" height="250" />
   <p>Profile Picture</p>
-  {#<img src="{% static profile_pic %}" alt="Profile pic" height="200" />}
+  <img src="{{profile_pic}}" alt="Profile pic" height="200" />
 
   <a
     id="btn-link-blue"
