@@ -12,6 +12,7 @@ import cv2
 import numpy as np
 from django.conf import settings
 import json
+import tensorflow as tf
 
 ia = IMDb()
 
