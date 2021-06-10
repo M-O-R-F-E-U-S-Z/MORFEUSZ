@@ -108,7 +108,7 @@ class Group(models.Model):
         for member in self.members.all():
             user = Profile.objects.get(user_profile=member)
             users.append(user)
-            #users_ML.append(cnn(user.profile_picture))
+            users_ML.append(cnn(user.profile_picture))
             users_opinion.append(  {'L': list(user.movies_like_watch.all()),
                                     'DL': list(user.movies_dont_like.all()),
                                     'WTW': list(user.movies_like_dont_watch.all()),
