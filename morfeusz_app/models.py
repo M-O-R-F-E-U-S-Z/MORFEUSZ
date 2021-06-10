@@ -60,8 +60,8 @@ def cnn(img):
     #X = cv2.imdecode(X, cv2.IMREAD_COLOR)
     #X = cv2.imread(img)
     req = urllib.request.urlopen(img)
-    dupa
     arr = np.asarray(bytearray(req.read()), dtype=np.uint8)
+    dupa
     X = cv2.imdecode(arr, -1)
     X = cv2.resize(X, (img_size[0], img_size[1]))
     X = np.expand_dims(X, axis=0)
