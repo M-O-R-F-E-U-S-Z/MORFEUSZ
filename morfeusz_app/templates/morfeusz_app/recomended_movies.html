@@ -3,8 +3,12 @@
 <h1>TOP RECOMENDATIONS:</h1> <br>
 
 {% for movie in movies %}
-<p>{{ movies[movie] }}</p>
-<img src="{{ movies[movie].cover_url }}">
-<p>{{ movie*100 }} %</p>
+<p>{{ movie }}</p>
+<img src="{{ movie.cover_url }}">
 {% endfor %}
+
+{% for result in results %}
+<p>{{ result * 100 }}%</p>
+{% endfor %}
+
 {% endblock content %}
