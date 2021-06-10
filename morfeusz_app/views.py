@@ -52,7 +52,8 @@ def manage_group(request, group_id):
         friends = FriendList.objects.get(user=user)
         friend_list = []
         for index, my_friend in enumerate(friends.friends.all(), start=1):
-            friend_list.append((my_friend.id, my_friend.username))
+            if my_friend not in group.members.all():
+                friend_list.append((my_friend.id, my_friend.username))
         form = AddGroupMember(friend_list)
     context['form'] = form
 
