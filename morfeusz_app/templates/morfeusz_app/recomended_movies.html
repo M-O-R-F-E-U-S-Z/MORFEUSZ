@@ -2,8 +2,9 @@
 {% block content %}
 <h1>TOP RECOMENDATIONS:</h1> <br>
 
-{% for movie in movies %}
+{% for movie, result in zip(movies, results) %}
 <p>{{ movie }}</p>
 <img src="{{ movie.cover_url }}">
+<p>{{ result*100 }} %</p>
 {% endfor %}
 {% endblock content %}
