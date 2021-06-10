@@ -21,16 +21,7 @@
         >Qualify</a
       >
     </div>
-    <div class="card" style="background-color: white">
-      <h1 style="font-size: x-large">Groups</h1>
-      <p style="margin-bottom: 2rem; width: 80%">
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facere libero
-        quos qui. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quae
-        consequuntur dolorem neque commodi necessitatibus soluta, aspernatur
-        rerum a recusandae itaque ad.
-      </p>
-      <a id="btn-link-blue" href="/groups/">Manage groups</a>
-    </div>
+
     <div class="card" style="background-color: white; height: auto">
       <h1 style="font-size: x-large">Friends</h1>
 
@@ -60,16 +51,19 @@
     </div>
   </div>
   <p>Background Picture:</p>
-  <img
+  {#<img
     src="{% static background %}"
     alt="Smiley face"
     width="250"
     height="250"
-  />
+  />}
   <p>Profile Picture</p>
-  <img src="{% static profile_pic %}" alt="Profile pic" height="200" />
+  {#<img src="{% static profile_pic %}" alt="Profile pic" height="200" />}
 
-  <a id="btn-link-blue" style="cursor: pointer; margin-bottom: 2rem"
+  <a
+    id="btn-link-blue"
+    style="cursor: pointer; margin-bottom: 2rem"
+    href="{% url 'users:upload_images' %}"
     >Change profile and background picture</a
   >
 </div>
