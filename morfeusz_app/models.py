@@ -59,13 +59,13 @@ def cnn(img):
     #X = np.asarray(bytearray(img.read()), dtype="uint8")
     #X = cv2.imdecode(X, cv2.IMREAD_COLOR)
     #X = cv2.imread(img)
+    ML_model = tf.keras.models.load_model(settings.MODEL_PATH)
     req = urllib.request.urlopen(img)
     arr = np.asarray(bytearray(req.read()), dtype=np.uint8)
     X = cv2.imdecode(arr, -1)
     X = cv2.resize(X, (img_size[0], img_size[1]))
     X = np.expand_dims(X, axis=0)
-    dupa
-    pred = settings.ML_MODEL.predict(X)
+    pred = ML_model.predict(X)
     weights = dict(zip(genres, pred[0]))
 
     return weights
