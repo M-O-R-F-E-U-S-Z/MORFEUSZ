@@ -2,9 +2,9 @@
 {% block content %}
 <h1>TOP RECOMENDATIONS:</h1> <br>
 
-{% for result, movie in movies.items() %}
-<p>{{ movie }}</p>
-<img src="{{ movie.cover_url }}">
-<p>{{ result*100 }} %</p>
+{% for movie in movies %}
+<p>{{ movies[movie] }}</p>
+<img src="{{ movies[movie].cover_url }}">
+<p>{{ movie*100 }} %</p>
 {% endfor %}
 {% endblock content %}
