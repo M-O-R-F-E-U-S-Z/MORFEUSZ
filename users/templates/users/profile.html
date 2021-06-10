@@ -1,25 +1,77 @@
 {% extends "morfeusz_app/base.html" %} {% load static %} {% block content %}
 
-<style>
-  .cover {
-    background-image: url("{% static background %}");
-  }
-</style>
-<div class="cover">
-  {#
+<div
+  style="
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  "
+>
+  <div class="grid">
+    <div class="card" style="background-color: white">
+      <h1 style="font-size: x-large">Qualify Movies</h1>
+      <p style="margin-bottom: 2rem; width: 80%">
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facere libero
+        quos qui. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quae
+        consequuntur dolorem neque commodi necessitatibus soluta, aspernatur
+        rerum a recusandae itaque ad.
+      </p>
+      <a id="btn-link-blue" href="{% url 'users:movie_qualification' %}"
+        >Qualify</a
+      >
+    </div>
+    <div class="card" style="background-color: white">
+      <h1 style="font-size: x-large">Groups</h1>
+      <p style="margin-bottom: 2rem; width: 80%">
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facere libero
+        quos qui. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quae
+        consequuntur dolorem neque commodi necessitatibus soluta, aspernatur
+        rerum a recusandae itaque ad.
+      </p>
+      <a id="btn-link-blue" href="/groups/">Manage groups</a>
+    </div>
+    <div class="card" style="background-color: white; height: auto">
+      <h1 style="font-size: x-large">Friends</h1>
+
+      <a id="btn-link-blue" href="{% url 'users:send_friend_request' %}"
+        >Send friend request</a
+      >
+
+      <h3>Friend request sent from:</h3>
+      {% for fr_req in request_from %} {{ fr_req }}
+      <a href="/users/accept_friend_request/{{ fr_req.id }}">Accept</a>
+      <a href="/users/decline_friend_request/{{ fr_req.id }}">Decline</a>
+      <br />
+      {% endfor %}
+
+      <h3>Friend request sent to:</h3>
+      {% for fr_req in request_to %} {{ fr_req.receiver }}<a
+        href="/users/cancel_friend_request/{{ fr_req.id }}"
+        >Cancel</a
+      >
+      <br />
+      {% endfor %}
+
+      <h3>Friend List:</h3>
+      {% for friend in friend_list.friends.all %} {{ friend }}
+      <a href="/users/unfriend/{{ friend.id }}">Unfriend</a> <br />
+      {% endfor %}
+    </div>
+  </div>
+  <p>Background Picture:</p>
   <img
     src="{% static background %}"
     alt="Smiley face"
     width="250"
     height="250"
-  />#}
+  />
+  <p>Profile Picture</p>
+  <img src="{% static profile_pic %}" alt="Profile pic" height="200" />
 
-  <h1>{{ user.username }}</h1>
-  <img src="{% static profile_pic %}" alt="Profile pic" height="200" /><br />
+  <a id="btn-link-blue" style="cursor: pointer; margin-bottom: 2rem"
+    >Change profile and background picture</a
+  >
 </div>
 
-<a class="btn btn-primary" href="{% url 'users:upload_images' %}"
-  >Change profile and background picture</a
->
-
-{# <img src="{% static background %}" alt="My image" />#} {% endblock content %}
+{% endblock content %}
