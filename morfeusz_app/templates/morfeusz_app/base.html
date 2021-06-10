@@ -14,6 +14,95 @@
   </head>
 
   <body>
+    {% if user.is_authenticated %}
+    <header class="header-container">
+      <div class="main-container">
+        <div class="logo-cont">
+          <a href="{% url 'morfeusz_app-home' %}">
+            <img
+              width="48px"
+              height="48px"
+              viewbox="0 0 48 48"
+              src="{% static 'images/morf_logo.png' %}"
+              alt="mofeusz_logo"
+            />
+          </a>
+        </div>
+        <label for="menu-toggle" class="label-cls">
+          <div>
+            <img
+              class="menu-img"
+              src="{% static 'images/dropdown_icon.png' %}"
+              alt="menu-icon"
+            />
+          </div>
+        </label>
+        <input type="checkbox" id="menu-toggle" class="input-dropdown" />
+        <div class="nav-items" id="menu">
+          <div class="items-container">
+            <ul class="items-list">
+              <li><a href="">Your Movies </a></li>
+
+              <li>
+                <a href="{% url 'users:profile' %}">Profile</a>
+              </li>
+              <li>
+                <a href="{% url 'users:logout' %}">Logout</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="main-content">
+      <h1 id="hello">Hello {{ user.username }}!</h1>
+      <div class="main-content-cards">
+        {% block content %}{% endblock content%}
+      </div>
+    </div>
+    <footer class="footer-container">
+      <a href="{% url 'morfeusz_app-home' %}">
+        <img
+          width="48px"
+          height="48px"
+          viewbox="0 0 48 48"
+          src="{% static 'images/morf_logo.png' %}"
+          alt="mofeusz_logo"
+        />
+      </a>
+
+      <p class="social-p">Follow us:</p>
+      <div class="images-container" style="gap: 0.5rem">
+        <a rel="noreferrer" href="https://www.facebook.com/" target="_blank">
+          <img
+            width="24px"
+            height="24px"
+            viewbox="0 0 24 24"
+            src="{% static 'images/fb_icon.png' %}"
+            alt="facebook-logo"
+          />
+        </a>
+        <a rel="noreferrer" href="https://www.instagram.com/" target="_blank">
+          <img
+            width="24px"
+            height="24px"
+            viewbox="0 0 24 24"
+            src="{% static 'images/insta_icon.png' %}"
+            alt="instagram-logo"
+          />
+        </a>
+        <a rel="noreferrer" href="https://www.twitter.com/" target="_blank">
+          <img
+            width="24px"
+            height="24px"
+            viewbox="0 0 24 24"
+            src="{% static 'images/twitter_icon.png' %}"
+            alt="twitter-logo"
+          />
+        </a>
+      </div>
+    </footer>
+    {% else %}
     <div class="container">
       <div class="image-div-morf">
         <a href="{% url 'morfeusz_app-home' %}"
@@ -74,25 +163,6 @@
           </div>
         </div>
         <div class="side" id="rightside">
-          {% if user.is_authenticated %}
-          <div id="important-text">
-            <p class="text-home">Go to Your <b>Profile</b>.</p>
-            <a class="link" id="btn-link" href="{% url 'users:profile' %}"
-              >Profile</a
-            >
-          </div>
-          <div class="col-md-8">
-            {% if messages %} {% for message in messages %}
-            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
-            {% endfor %} {% endif %} {% block content %}{% endblock %}
-          </div>
-          <div id="important-text">
-            <p class="text-home">
-              If it's not Your account, please <b>logout</b>.
-            </p>
-            <a id="btn-link" href="{% url 'users:logout' %}">Logout</a>
-          </div>
-          {% else %}
           <div id="important-text">
             <p class="text-home">
               If You don't have an account, <b>sign up</b>!
@@ -109,11 +179,11 @@
               >Log In</a
             >
             <div class="footer"></div>
-            {% endif %}
           </div>
         </div>
         <footer class="footer"></footer>
       </div>
     </div>
+    {% endif %}
   </body>
 </html>
