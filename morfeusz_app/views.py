@@ -73,9 +73,7 @@ def recomended_movies(request, group_id):
     group = Group.objects.get(id=group_id)
     match = group.movie_matcher()
     max_recomendations = group.MAX_RECOMENDATIONS
-    context = {'results': [], 'titles': [], 'movies': []}
+    context = {'movies': {}}
     for i in range(max_recomendations):
-        context['results'].append(match[i][0])
-        context['titles'].append(match[i][1])
-        context['movies'].append(match[i][2])                                               
+        context['movies'][match[i][0]] = match[i][2]                                    
     return render(request, 'morfeusz_app/recomended_movies.html', context)
