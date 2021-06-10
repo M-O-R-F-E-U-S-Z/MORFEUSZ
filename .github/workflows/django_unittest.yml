@@ -7,17 +7,6 @@ jobs:
     name: Run Unittest
     runs-on: ubuntu-latest
     
-    services:
-      postgres:
-        image: postgres:10.8
-        env:
-          POSTGRES_HOST: ec2-52-50-171-4.eu-west-1.compute.amazonaws.com
-          POSTGRES_USER: zzspaojwzkemdi
-          POSTGRES_PASSWORD: c0101243dd8a2f8e1abb9b745cbb6713b2742d2fc0f5ea08d654e79eb258611b
-          POSTGRES_DB: d9nich36iddmav
-          POSTGRES_PORT: 5432
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-    
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-python@v2
@@ -28,4 +17,11 @@ jobs:
         pip install -r .github/workflows/requirements.txt
         
     - name: Test
+      env:
+        DEBUG: true
+        DB_HOST: ${{ secrets.DB_HOST }} 
+        DB_NAME: ${{ secrets.DB_NAME }}
+        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        DB_USERNAME: ${{ secrets.DB_USERNAME }}
+        SECRET_KEY: ${{ secrets.SECRET_KEY }}
       run: python manage.py test
