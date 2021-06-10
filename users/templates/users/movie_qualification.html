@@ -1,10 +1,57 @@
-{% extends "morfeusz_app/base.html" %}
-{% block content %}
-    <h1>Scoring</h1>
-    <p>{{ movie.title }}</p>
-    <img src="{{ movie.cover_url }}">
-    <a class="btn btn-primary" href="{% url 'users:movies_like_watch' %}">Like it!</a>
-    <a class="btn btn-primary" href="{% url 'users:movies_dont_like' %}">Don't like it!</a>
-    <a class="btn btn-primary" href="{% url 'users:movies_like_dont_watch' %}">Want to watch it!</a>
-    <a class="btn btn-primary" href="{% url 'users:movies_watch' %}">Don't want to watch it!</a>
+{% extends "morfeusz_app/base.html" %} {% block content %}
+<div
+  style="
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  "
+>
+  <div class="card" style="text-align: center">
+    <h2 style="width: 80%">What do You think about that movie?</h2>
+    <p style="width: 80%">Title: <b>{{ movie.title }}</b></p>
+    <img
+      src="{{ movie.cover_url }}"
+      style="margin-bottom: 1rem; border-radius: 0.75rem; /* 12px */"
+    />
+  </div>
+  <div class="ratings">
+    <div class="centered">
+      <a
+        class="centered"
+        id="btn-link-blue"
+        href="{% url 'users:movies_dont_like' %}"
+        style="font-size: 1rem"
+        >Nope</a
+      >
+    </div>
+    <div class="centered">
+      <a
+        class="centered"
+        id="btn-link-blue"
+        href="{% url 'users:movies_like_dont_watch' %}"
+        style="font-size: 1rem"
+        >One time only
+      </a>
+    </div>
+    <div class="centered">
+      <a
+        class="centered"
+        id="btn-link-blue"
+        href="{% url 'users:movies_like_watch' %}"
+        style="font-size: 1rem"
+        >Would repeat</a
+      >
+    </div>
+    <div class="centered">
+      <a
+        class="centered"
+        id="btn-link-blue"
+        href="{% url 'users:movies_watch' %}"
+        style="font-size: 1rem"
+        >Would watch</a
+      >
+    </div>
+  </div>
+</div>
 {% endblock content %}

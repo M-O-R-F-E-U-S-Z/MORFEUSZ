@@ -1,12 +1,6 @@
-{% extends "morfeusz_app/base.html" %}
-{% block content %}
-    <h1>Send friend request</h1>
-<div class="content-section">
-    <form method="POST">
-        {% csrf_token %}
-        <fieldset class="form-group">
-            {{ form }}
-        </fieldset>
-    </form>
+{% extends "morfeusz_app/base.html" %} {% block content %}
+<div style="display: flex; flex-direction: column; align-items: center">
+  <h2>Send friend request</h2>
+  <form class="form-cls" method="POST">{% csrf_token %} {{ form }}</form>
 </div>
 {% endblock content %}
