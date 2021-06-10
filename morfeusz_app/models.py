@@ -5,7 +5,7 @@ from imdb import IMDb
 #import random
 #import string
 import os
-
+import urllib
 from numpy.lib.function_base import append
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
 import cv2
@@ -58,7 +58,10 @@ def cnn(img):
     img_size = [128, 128]
     #X = np.asarray(bytearray(img.read()), dtype="uint8")
     #X = cv2.imdecode(X, cv2.IMREAD_COLOR)
-    X = cv2.imread(img)
+    #X = cv2.imread(img)
+    req = urllib.urlopen(img)
+    arr = np.asarray(bytearray(req.read()), dtype=np.uint8)
+    X = cv2.imdecode(arr, -1)
     X = cv2.resize(X, (img_size[0], img_size[1]))
     X = np.expand_dims(X, axis=0)
     
