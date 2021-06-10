@@ -178,5 +178,5 @@ class Group(models.Model):
                 top_recomendations[0] = [result, movie.title, movie]
             top_recomendations =  sorted(top_recomendations)
         
-        return sorted(top_recomendations, reverse=True)
-        
+        #return sorted(top_recomendations, reverse=True)
+        return dupa
