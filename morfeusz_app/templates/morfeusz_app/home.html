@@ -1,6 +1,7 @@
 {% extends "morfeusz_app/base.html" %} {% block content %}
 <div>
   {% if user.is_authenticated %}
+  <h1 id="hello">Hello {{ user.username }}!</h1>
   <div class="card" style="background-color: white">
     <h1 style="font-size: x-large">Groups</h1>
     <p style="margin-bottom: 2rem; width: 80%">

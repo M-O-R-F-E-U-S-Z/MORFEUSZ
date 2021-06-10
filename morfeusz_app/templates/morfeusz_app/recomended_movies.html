@@ -1,14 +1,18 @@
-{% extends "morfeusz_app/base.html" %}
-{% block content %}
-<h1>TOP RECOMENDATIONS:</h1> <br>
-
-{% for movie in movies %}
-<p>{{ movie }}</p>
-<img src="{{ movie.cover_url }}">
-{% endfor %}
-
-{% for result in results %}
-<p>{{ result }}%</p>
-{% endfor %}
-
+{% extends "morfeusz_app/base.html" %} {% block content %}
+<div class="container">
+  <h2>Top Recomendations:</h2>
+  <div class="centered" style="flex-direction: column">
+    {% for movie in movies %}
+    <div style="display: block; margin: 0.75rem">
+      <p>{{ movie }}</p>
+      <img
+        style="margin-right: 1rem; margin-left: 1rem"
+        src="{{ movie.cover_url }}"
+      />
+      {% endfor %} {% for result in results %}
+      <p>{{ result }}%</p>
+      {% endfor %}
+    </div>
+  </div>
+</div>
 {% endblock content %}

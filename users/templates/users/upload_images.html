@@ -1,15 +1,49 @@
-{% extends "morfeusz_app/base.html" %}
-{% block content %}
-    <h1>Upload background picture</h1>
-<div class="content-section">
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ b_form.as_p }}
-        {{ p_form.as_p }}
-        <button type="submit">Upload</button>
+{% extends "morfeusz_app/base.html" %} {% block content %}
+<div class="container">
+  <h2>Upload profile & background picture</h2>
+  <div class="centered" style="flex-direction: column">
+    <form
+      method="POST"
+      style="width: 90%"
+      enctype="multipart/form-data"
+      class="form-cls"
+    >
+      {% csrf_token %}
+      <div class="centered" style="flex-direction: column">{{ p_form }}</div>
+      <button
+        type="submit"
+        id="btn-link-blue"
+        style="
+          font-size: 1rem;
+          margin-top: 1rem;
+          font-weight: 500;
+          cursor: pointer;
+        "
+      >
+        Upload image
+      </button>
     </form>
-
-    <h1>Upload profile picture</h1>
-
+    <form
+      method="POST"
+      style="width: 90%"
+      enctype="multipart/form-data"
+      class="form-cls"
+    >
+      {% csrf_token %}
+      <div class="centered" style="flex-direction: column">{{ b_form }}</div>
+      <button
+        type="submit"
+        id="btn-link-blue"
+        style="
+          font-size: 1rem;
+          margin-top: 1rem;
+          font-weight: 500;
+          cursor: pointer;
+        "
+      >
+        Upload image
+      </button>
+    </form>
+  </div>
 </div>
 {% endblock content %}

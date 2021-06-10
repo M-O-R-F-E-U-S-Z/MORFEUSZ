@@ -1,21 +1,24 @@
-{% extends "morfeusz_app/base.html" %}
-{% block content %}
-    <h1>{{ group.name }}</h1>
+{% extends "morfeusz_app/base.html" %} {% block content %}
+<div class="card" style="height: auto">
+  <h2>{{ group.name }}</h2>
+  <h3>Group members</h3>
+  {% for member in members %} {{ member }}
+  <a href="/delete_from_group/{{ group.id }}/{{ member.id }}"
+    >Delete from group</a
+  >
+  <br />
+  {% endfor %}
 
-    <h2>Group members</h2>
-    {% for member in members %}
-    {{ member }} <a href="/delete_from_group/{{ group.id }}/{{ member.id }}">Delete from group</a> <br>
-    {% endfor %}
+  <form method="POST">
+    {% csrf_token %} {{ form }}
+    <button type="submit">Add member</button>
+  </form>
 
-
-    <form method="POST">
-        {% csrf_token %}
-        <fieldset class="form-group">
-            {{ form.as_p }}
-            <button type="submit">Add member</button>
-        </fieldset>
-    </form>
-
-    <a href="/recomended_movies/{{ group.id }}">Find movies to watch!</a> 
-
+  <a
+    id="btn-link-blue"
+    style="width: 70%; margin-top: 2rem; margin-bottom: 1rem"
+    href="/recomended_movies/{{ group.id }}"
+    >Find movies to watch!</a
+  >
+</div>
 {% endblock content %}
