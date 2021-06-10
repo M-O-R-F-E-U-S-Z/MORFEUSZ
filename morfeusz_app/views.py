@@ -4,7 +4,6 @@ from django.shortcuts import render, redirect
 from users.models import FriendList
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
 
 
 def home(request):
@@ -48,7 +47,7 @@ def manage_group(request, group_id):
     if request.method == "POST":
         member_to_add = User.objects.get(id=request.POST['friend'])
         group.add_member(member_to_add)
-        return redirect('morfeusz_app/manage_group.html')
+        return redirect('group', group_id=group_id)
     else:
         friends = FriendList.objects.get(user=user)
         friend_list = []
@@ -65,7 +64,7 @@ def delete_from_group(request, group_id, member_id):
     group = Group.objects.get(id=group_id)
     member = User.objects.get(id=member_id)
     group.remove_member(member)
-    return redirect('morfeusz_app-home')
+    return redirect('group', group_id=group_id)
 
 
 @login_required()
