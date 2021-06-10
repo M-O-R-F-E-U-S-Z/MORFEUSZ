@@ -56,9 +56,9 @@ class Movie(models.Model):
 def cnn(img):
     genres = ['Action', 'Comedy', 'Drama', 'Horror', 'Romance']
     img_size = [128, 128]
-    X = np.asarray(bytearray(img.read()), dtype="uint8")
-    X = cv2.imdecode(X, cv2.IMREAD_COLOR)
-    #X = cv2.imread(user.profile_picture)
+    #X = np.asarray(bytearray(img.read()), dtype="uint8")
+    #X = cv2.imdecode(X, cv2.IMREAD_COLOR)
+    X = cv2.imread(img)
     X = cv2.resize(X, (img_size[0], img_size[1]))
     X = np.expand_dims(X, axis=0)
     
@@ -108,7 +108,7 @@ class Group(models.Model):
         for member in self.members.all():
             user = Profile.objects.get(user_profile=member)
             users.append(user)
-            users_ML.append(cnn(user.profile_picture))
+            users_ML.append(cnn(user.profile_picture.url))
             users_opinion.append(  {'L': list(user.movies_like_watch.all()),
                                     'DL': list(user.movies_dont_like.all()),
                                     'WTW': list(user.movies_like_dont_watch.all()),
