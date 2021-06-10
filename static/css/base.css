@@ -151,10 +151,6 @@ h1 {
   margin-top: 1.25rem /* 20px */;
   margin-bottom: 2rem /* 32px */;
   justify-content: center;
-  display: grid;
-  grid-template-columns: repeat(1, minmax(0, 1fr));
-  grid-template-rows: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
 }
 
 .card {
@@ -166,6 +162,7 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 1rem;
 }
 
 .footer-container {
@@ -417,11 +414,6 @@ h1 {
 
   .items-list > li > a {
     padding: 1rem /* 16px */;
-  }
-
-  .grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-template-rows: repeat(1, minmax(0, 1fr));
   }
 }
 
