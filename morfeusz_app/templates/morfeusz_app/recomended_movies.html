@@ -2,7 +2,7 @@
 {% block content %}
 <h1>TOP RECOMENDATIONS:</h1> <br>
 
-{% for movie, result in zip(movies, results) %}
+{% for result, movie in movies.items() %}
 <p>{{ movie }}</p>
 <img src="{{ movie.cover_url }}">
 <p>{{ result*100 }} %</p>
