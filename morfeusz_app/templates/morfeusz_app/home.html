@@ -1,4 +1,16 @@
 {% extends "morfeusz_app/base.html" %} {% block content %}
-<div>{% if user.is_authenticated %}</div>
+<div>
+  {% if user.is_authenticated %}
+  <div class="card" style="background-color: white">
+    <h1 style="font-size: x-large">Groups</h1>
+    <p style="margin-bottom: 2rem; width: 80%">
+      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facere libero
+      quos qui. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quae
+      consequuntur dolorem neque commodi necessitatibus soluta, aspernatur rerum
+      a recusandae itaque ad.
+    </p>
+    <a id="btn-link-blue" href="/groups/">Manage groups</a>
+  </div>
+</div>
 
 {% endif %} {% endblock content %}
