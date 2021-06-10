@@ -79,10 +79,10 @@ class Group(models.Model):
     
     INIT_GENRE_RATING = 0.5
     OPINION_WAGES = {
-            'L': 1,
-            'DL': -1,
-            'WTW': 1,
-            'DWTW': -1
+            'WOULD REPEAT': 1,
+            'NOPE': -1.25,
+            'ONE TIME ONLY': -0.5,
+            'WOULD WATCH': 0.75,
         }
     FINAL_WAGES = {
             'genre': 0.6,
@@ -113,10 +113,10 @@ class Group(models.Model):
             user = Profile.objects.get(user_profile=member)
             users.append(user)
             users_ML.append(cnn(user.profile_picture.url))
-            users_opinion.append(  {'L': list(user.movies_like_watch.all()),
-                                    'DL': list(user.movies_dont_like.all()),
-                                    'WTW': list(user.movies_like_dont_watch.all()),
-                                    'DWTW': list(user.movies_watch.all())} )
+            users_opinion.append(  {'WOULD REPEAT': list(user.movies_like_watch.all()),
+                                    'NOPE': list(user.movies_dont_like.all()),
+                                    'ONE TIME ONLY': list(user.movies_like_dont_watch.all()),
+                                    'WOULD WATCH': list(user.movies_watch.all())} )
 
 
         genres = {'Action': [0,0,self.INIT_GENRE_RATING], 'Comedy': [0,0,self.INIT_GENRE_RATING],
@@ -178,5 +178,4 @@ class Group(models.Model):
                 top_recomendations[0] = [result, movie.title, movie]
             top_recomendations =  sorted(top_recomendations)
         
-        #return sorted(top_recomendations, reverse=True)
-        return dupa
+        return sorted(top_recomendations, reverse=True)
