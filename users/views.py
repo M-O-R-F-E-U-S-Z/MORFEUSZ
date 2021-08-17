@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .forms import UserRegisterForm, FriendRequestForm, UploadBackgroundForm, UploadProfileForm
+from .forms import UpdateMLPoints, UserRegisterForm, FriendRequestForm, UploadBackgroundForm, UploadProfileForm
 from django.contrib.auth.models import User
 from users.models import FriendRequest, FriendList
 from django.http import HttpResponse
@@ -9,8 +9,25 @@ from morfeusz_app.models import Movie
 from .models import Profile
 from django.db.models import Max
 import random
-# from imageupload.settings import MEDIA_ROOT, MEDIA_URL
-# from django.conf import settings
+import cv2
+import numpy as np
+from django.conf import settings
+import tensorflow as tf
+import urllib
+
+def cnn(img):
+    genres = ['Action', 'Comedy', 'Drama', 'Horror', 'Romance']
+    img_size = [128, 128]
+    ML_model = tf.keras.models.load_model(settings.MODEL_PATH)
+    req = urllib.request.urlopen(img)
+    arr = np.asarray(bytearray(req.read()), dtype=np.uint8)
+    X = cv2.imdecode(arr, -1)
+    X = cv2.resize(X, (img_size[0], img_size[1]))
+    X = np.expand_dims(X, axis=0)
+    pred = ML_model.predict(X)
+    weights = dict(zip(genres, pred[0]))
+    return weights
+
 
 
 def register(request):
@@ -28,15 +45,6 @@ def register(request):
         form = UserRegisterForm()
     return render(request, 'users/register.html', {'form': form})
 
-
-# def get_random_movie():
-#     max_id = Movie.objects.all().aggregate(max_id=Max("id"))['max_id']
-#     while True:
-#         pk = random.randint(1, max_id)
-#         movie = Movie.objects.filter(pk=pk).first()
-#         if movie:
-#             return movie
-
 @login_required
 def movie_qualification(request):
     user = request.user
@@ -52,7 +60,6 @@ def movie_qualification(request):
     else:
         return HttpResponse("No more movies to qualification.")
 
-
 @login_required
 def movies_dont_like(request):
     user = request.user
@@ -63,7 +70,6 @@ def movies_dont_like(request):
     profile.save()
     return redirect('users:movie_qualification')
 
-
 @login_required
 def movies_like_dont_watch(request):
     user = request.user
@@ -73,7 +79,6 @@ def movies_like_dont_watch(request):
     profile.movies_like_dont_watch.add(movie)
     profile.save()
     return redirect('users:movie_qualification')
-
 
 @login_required
 def movies_like_watch(request):
@@ -95,7 +100,6 @@ def movies_watch(request):
     profile.movies_watch.add(movie)
     profile.save()
     return redirect('users:movie_qualification')
-
 
 @login_required
 def profile(request):
@@ -126,15 +130,12 @@ def profile(request):
         context['profile_pic'] = profile_pic
     return render(request, 'users/profile.html', context)
 
-
 def login(request):
     return render(request, 'users/login.html')
-
 
 @login_required
 def logout(request):
     return render(request, 'users/logout.html')
-
 
 @login_required
 def send_friend_request(request):
@@ -169,7 +170,6 @@ def send_friend_request(request):
         form = FriendRequestForm()
     return render(request, 'users/send_friend_request.html', {'form': form})
 
-
 @login_required
 def accept_friend_request(request, request_id):
     friend_request = FriendRequest.objects.get(id=request_id)
@@ -184,7 +184,6 @@ def accept_friend_request(request, request_id):
         messages.info(request, f"You can't accept request that is not sent to you.")
         return redirect('users:profile')
 
-
 @login_required
 def decline_friend_request(request, request_id):
     friend_request = FriendRequest.objects.get(id=request_id)
@@ -196,7 +195,6 @@ def decline_friend_request(request, request_id):
         messages.info(request, f"You can't decline request that is not sent to you.")
         return redirect('users:profile')
 
-
 @login_required
 def cancel_friend_request(request, request_id):
     friend_request = FriendRequest.objects.get(id=request_id)
@@ -207,7 +205,6 @@ def cancel_friend_request(request, request_id):
     else:
         messages.info(request, f"You can't cancel request that is not sent to you.")
         return redirect('users:profile')
-
 
 @login_required
 def unfriend(request, friend_id):
@@ -222,18 +219,16 @@ def unfriend(request, friend_id):
         messages.info(request, f"It's not your friend")
         return redirect('users:profile')
 
-
 @login_required
 def upload_images(request):
     if request.method == "POST":
-        b_form = UploadBackgroundForm(request.POST, request.FILES, instance=request.user.user_profile)
-        p_form = UploadProfileForm(request.POST, request.FILES, instance=request.user.user_profile)
-        if b_form.is_valid() and p_form.is_valid():
-            b_form.save()
+        user = request.user
+        p_form = UploadProfileForm(request.POST, request.FILES, instance=user.user_profile)
+        if  p_form.is_valid():
             p_form.save()
+            user.ML_points = cnn(user.user_profile)
             return redirect('users:profile')
     else:
-        b_form = UploadBackgroundForm(instance=request.user.user_profile)
         p_form = UploadProfileForm(instance=request.user.user_profile)
-    context = {'b_form': b_form, "p_form": p_form}
+    context = {"p_form": p_form}
     return render(request, 'users/upload_images.html', context)

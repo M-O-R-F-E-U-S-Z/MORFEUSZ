@@ -1,18 +1,12 @@
-#from users.views import movies_dont_like, movies_like_dont_watch, movies_like_watch, movies_watch
 from django.db import models
 from django.contrib.auth.models import User
 from imdb import IMDb
-#import random
-#import string
 import os
-import urllib
 from numpy.lib.function_base import append
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
-import cv2
-import numpy as np
 from django.conf import settings
 import json
-import tensorflow as tf
+
 
 ia = IMDb()
 
@@ -46,50 +40,24 @@ class Movie(models.Model):
         return self.title
 
 
-# def generate_unique_code():
-#     length = 6
-#     while True:
-#         new_code = ''.join(random.choise(string.ascii_uppercase, k=length))
-#         if Group.objects.filter(code=new_code).exists():
-#             break
-#     return new_code
-
-def cnn(img):
-    genres = ['Action', 'Comedy', 'Drama', 'Horror', 'Romance']
-    img_size = [128, 128]
-    #X = np.asarray(bytearray(img.read()), dtype="uint8")
-    #X = cv2.imdecode(X, cv2.IMREAD_COLOR)
-    #X = cv2.imread(img)
-    ML_model = tf.keras.models.load_model(settings.MODEL_PATH)
-    req = urllib.request.urlopen(img)
-    arr = np.asarray(bytearray(req.read()), dtype=np.uint8)
-    X = cv2.imdecode(arr, -1)
-    X = cv2.resize(X, (img_size[0], img_size[1]))
-    X = np.expand_dims(X, axis=0)
-    pred = ML_model.predict(X)
-    weights = dict(zip(genres, pred[0]))
-
-    return weights
-
-################################
 from users.models import Profile
-################################
+
 
 class Group(models.Model):
     
-    INIT_GENRE_RATING = 0.5
-    OPINION_WAGES = {
+    _INIT_GENRE_RATING = 0.5
+    _OPINION_WAGES = {
             'WOULD REPEAT': 1,
             'NOPE': -1.25,
             'ONE TIME ONLY': -0.5,
             'WOULD WATCH': 0.75,
         }
-    FINAL_WAGES = {
+    _FINAL_WAGES = {
             'genre': 0.6,
             'rating': 0.3, 
             'ML': 0.1
         }
-    MAX_RECOMENDATIONS = 10
+    _MAX_RECOMENDATIONS = 10
 
     name = models.CharField(max_length=30,  default="")
     members = models.ManyToManyField(User, related_name="members")
@@ -112,7 +80,7 @@ class Group(models.Model):
         for member in self.members.all():
             user = Profile.objects.get(user_profile=member)
             users.append(user)
-            users_ML.append(cnn(user.profile_picture.url))
+            users_ML.append(user.ML_points)
             users_opinion.append(  {'WOULD REPEAT': list(user.movies_like_watch.all()),
                                     'NOPE': list(user.movies_dont_like.all()),
                                     'ONE TIME ONLY': list(user.movies_like_dont_watch.all()),
