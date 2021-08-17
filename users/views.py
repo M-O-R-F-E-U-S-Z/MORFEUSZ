@@ -226,7 +226,7 @@ def upload_images(request):
         p_form = UploadProfileForm(request.POST, request.FILES, instance=user.user_profile)
         if  p_form.is_valid():
             p_form.save()
-            user.ML_points = cnn(user.user_profile)
+            #user.ML_points = cnn(user.user_profile)
             return redirect('users:profile')
     else:
         p_form = UploadProfileForm(instance=request.user.user_profile)
