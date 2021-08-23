@@ -4,4 +4,3 @@ env
 *.whl
 db.sqlite3
 *.jpg
-*.png
