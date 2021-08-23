@@ -1,7 +1,7 @@
 # MORFEUSZ
 (Movies Open Reliable Finder Extra User-friendly Search-engine Zero)
 
-available at: [morfeusz.herokuapp.com](morfeusz.herokuapp.com)
+available at: [morfeusz.herokuapp.com](https://morfeusz.herokuapp.com/)
 (you might need to waint up to 3 min. for page to load at first becose heroku account is not premium, so it needs to build up the whole page from the begining)
 ___
 
