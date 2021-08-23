@@ -47,7 +47,7 @@ Inside your profile, you can also add and remove friends as well as change your 
 
 ![](images/profile.png)
 
-Inside the group, you can add and remove members. When the group composition is finished, press the <br>**Find movies to watch** button and the algorithm will create a weighted profile of garage preferences, and based on it and the ratings of movies in the iMDB database, I will find the best movies to watch.
+Inside the group, you can add and remove members. When the group composition is finished, press the <br>**Find movies to watch** button and the algorithm will create a weighted profile of movies preferences, and based on it and the ratings of movies in the iMDB database, I will find the best movies to watch.
 
 ![](images/groups.png)
 ![](images/fit.png)
