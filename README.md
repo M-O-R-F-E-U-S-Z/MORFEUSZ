@@ -30,7 +30,7 @@ Tinder for movies. App for deciding what movies to watch with Your friends, base
 1. all of this working on Heroku with debug turned to OFF
 
 ---
-After entering the application, we are greeted by the login page. We can create a new account there, or log in to an existing one
+After entering the MORFEUSZ, we are greeted by the login page. We can create a new account there, or log in to an existing one
 
 ![](images/login_register.png)
 
