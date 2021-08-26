@@ -51,7 +51,7 @@ Inside the group, you can add and remove members. When the group composition is 
 
 ![](images/groups.png)
 ![](images/fit.png)
-## Roadmap:
+
 ### sprint 1 (-10.05.2021): 
 - research report: (P. Potępa)
   - data sources
